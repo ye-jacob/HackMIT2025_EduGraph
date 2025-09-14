@@ -2,6 +2,9 @@
 
 Jacob and Helena's Submission to HackMIT 2025
 
+## Presentation
+https://www.canva.com/design/DAGy9nAR52g/gy8DVNLFr3ti0t7iq7kOsA/view?utm_content=DAGy9nAR52g&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=he3e6076047
+
 ## Overview
 
 EduGraph is an interactive educational video analysis platform that automatically extracts concepts from educational videos and visualizes them as an interactive knowledge graph. Students can explore concepts, navigate through video content, and understand the relationships between different educational topics.
