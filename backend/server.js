@@ -313,6 +313,74 @@ function getVideoDuration(videoPath) {
   });
 }
 
+// Save transcript to transcript.txt with backup
+async function saveTranscriptToFile(transcript, originalFilename) {
+  try {
+    const transcriptPath = path.join(__dirname, '..', 'transcript.txt');
+    const backupPath = path.join(__dirname, '..', 'transcript_backup.txt');
+    
+    // Create backup of existing transcript if it exists
+    if (fs.existsSync(transcriptPath)) {
+      const existingContent = fs.readFileSync(transcriptPath, 'utf8');
+      fs.writeFileSync(backupPath, existingContent);
+      console.log('Backed up existing transcript to transcript_backup.txt');
+    }
+    
+    // Add header with video information
+    const timestamp = new Date().toISOString();
+    const header = `# Transcript from: ${originalFilename}\n# Generated on: ${timestamp}\n# ============================================\n\n`;
+    
+    // Write new transcript
+    fs.writeFileSync(transcriptPath, header + transcript);
+    console.log('Transcript saved to transcript.txt');
+    
+  } catch (error) {
+    console.error('Error saving transcript:', error);
+    // Don't throw error - transcript saving is not critical for the main functionality
+  }
+}
+
+// Save structured data and graph data to JSON files
+async function saveStructuredData(structuredData, nodes, edges, originalFilename) {
+  try {
+    const timestamp = new Date().toISOString();
+    const baseFilename = originalFilename.replace(/\.[^/.]+$/, "").replace(/[^a-zA-Z0-9]/g, '_');
+    
+    // Save structured transcript data
+    const structuredPath = path.join(__dirname, '..', `${baseFilename}_structured_transcript.json`);
+    const structuredWithMetadata = {
+      metadata: {
+        source_video: originalFilename,
+        generated_on: timestamp,
+        type: "structured_transcript"
+      },
+      ...structuredData
+    };
+    fs.writeFileSync(structuredPath, JSON.stringify(structuredWithMetadata, null, 2));
+    console.log(`Structured transcript saved to ${baseFilename}_structured_transcript.json`);
+    
+    // Save graph data (nodes and edges)
+    const graphPath = path.join(__dirname, '..', `${baseFilename}_graph_data.json`);
+    const graphData = {
+      metadata: {
+        source_video: originalFilename,
+        generated_on: timestamp,
+        type: "knowledge_graph",
+        node_count: nodes.length,
+        edge_count: edges.length
+      },
+      nodes: nodes,
+      edges: edges
+    };
+    fs.writeFileSync(graphPath, JSON.stringify(graphData, null, 2));
+    console.log(`Graph data saved to ${baseFilename}_graph_data.json`);
+    
+  } catch (error) {
+    console.error('Error saving structured data:', error);
+    // Don't throw error - data saving is not critical for the main functionality
+  }
+}
+
 // Main processing endpoint
 app.post('/api/process-video', upload.single('video'), async (req, res) => {
   try {
@@ -345,6 +413,14 @@ app.post('/api/process-video', upload.single('video'), async (req, res) => {
     
     // Step 6: Create transcript segments
     const transcriptSegments = createTranscriptSegments(transcript, duration);
+    
+    // Step 7: Save transcript to transcript.txt (with backup)
+    console.log('Saving transcript to transcript.txt...');
+    await saveTranscriptToFile(transcript, req.file.originalname);
+    
+    // Step 8: Save structured data and graph data to JSON files
+    console.log('Saving structured data and graph data...');
+    await saveStructuredData(structuredData, nodes, edges, req.file.originalname);
     
     // Clean up temporary files
     fs.unlinkSync(videoPath);
