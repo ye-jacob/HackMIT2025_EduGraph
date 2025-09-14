@@ -279,36 +279,16 @@ export const EduGraph: React.FC = () => {
         <Header />
         
         <div className="flex flex-1">
-          <Sidebar side="right" className="border-l">
-            <SidebarHeader className="flex flex-row items-center gap-2 p-4 border-b">
-              <Network className="h-5 w-5" />
-              <h2 className="font-semibold">Knowledge Graph</h2>
-            </SidebarHeader>
-            <SidebarContent className="p-4">
-              <KnowledgeGraph
-                nodes={videoData.nodes}
-                edges={videoData.edges}
-                onNodeClick={handleNodeClick}
-                selectedNode={selectedNode}
-              />
-              
-              {selectedNode && (
-                <div className="mt-4">
-                  <ConceptPanel
-                    concept={selectedNode}
-                    onClose={() => setSelectedNode(null)}
-                    onTimeJump={(time) => setCurrentTime(time)}
-                  />
-                </div>
-              )}
-            </SidebarContent>
-          </Sidebar>
-          
-          <SidebarInset>
+          <SidebarInset className="flex-1">
             <div className="flex flex-col gap-4 p-4 h-full">
-              <div className="flex items-center gap-2 pb-2 border-b">
-                <SidebarTrigger />
+              <div className="flex items-center justify-between gap-2 pb-2 border-b">
                 <h1 className="text-lg font-semibold">Educational Video Player</h1>
+                <SidebarTrigger className="ml-auto">
+                  <Button variant="outline" size="sm" className="gap-2">
+                    <Network className="h-4 w-4" />
+                    Knowledge Graph
+                  </Button>
+                </SidebarTrigger>
               </div>
               
               <div className="flex-1 flex flex-col gap-4">
@@ -330,6 +310,31 @@ export const EduGraph: React.FC = () => {
               </div>
             </div>
           </SidebarInset>
+          
+          <Sidebar side="right" className="w-1/2 border-l bg-background/95 backdrop-blur-sm data-[state=closed]:w-0">
+            <SidebarHeader className="flex flex-row items-center gap-2 p-4 border-b bg-background">
+              <Network className="h-5 w-5" />
+              <h2 className="font-semibold">Knowledge Graph</h2>
+            </SidebarHeader>
+            <SidebarContent className="p-4 bg-background">
+              <KnowledgeGraph
+                nodes={videoData.nodes}
+                edges={videoData.edges}
+                onNodeClick={handleNodeClick}
+                selectedNode={selectedNode}
+              />
+              
+              {selectedNode && (
+                <div className="mt-4">
+                  <ConceptPanel
+                    concept={selectedNode}
+                    onClose={() => setSelectedNode(null)}
+                    onTimeJump={(time) => setCurrentTime(time)}
+                  />
+                </div>
+              )}
+            </SidebarContent>
+          </Sidebar>
         </div>
       </div>
     </SidebarProvider>
