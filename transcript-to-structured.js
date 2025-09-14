@@ -9,7 +9,7 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 // Configuration
-const GEMINI_API_KEY = process.env.GEMINI_API || 'AIzaSyDwF3aqK1i_PLJCIm9exxk6-0gt6yqNp4Q';
+const GEMINI_API_KEY = process.env.GEMINI_API;
 const TRANSCRIPT_FILE = 'transcript.txt';
 const OUTPUT_FILE = 'mit_18_06_lecture_01_structured_transcript.json';
 
