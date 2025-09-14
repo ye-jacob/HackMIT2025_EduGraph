@@ -1,0 +1,326 @@
+{
+  "metadata": {
+    "source_video": "Data Structures_ Crash Course Computer Science #14.mp4",
+    "generated_on": "2025-09-14T14:50:03.814Z",
+    "type": "structured_transcript"
+  },
+  "lecture_info": {
+    "course": "Crash Course Computer Science",
+    "lecture_number": 1,
+    "instructor": "Carrie Anne",
+    "title": "Data Structures"
+  },
+  "hierarchical_structure": {
+    "layer_1": [
+      {
+        "id": "1",
+        "title": "Introduction to Data Structures",
+        "layer_2": [
+          {
+            "id": "1.1",
+            "title": "Arrays and Lists",
+            "layer_3": [
+              {
+                "id": "1.1.1",
+                "title": "Array Definition and Memory Representation"
+              },
+              {
+                "id": "1.1.2",
+                "title": "Array Indexing and Access"
+              },
+              {
+                "id": "1.1.3",
+                "title": "Array Operations and Built-in Functions"
+              }
+            ]
+          },
+          {
+            "id": "1.2",
+            "title": "Strings",
+            "layer_3": [
+              {
+                "id": "1.2.1",
+                "title": "Strings as Arrays of Characters"
+              },
+              {
+                "id": "1.2.2",
+                "title": "Null Character Termination"
+              },
+              {
+                "id": "1.2.3",
+                "title": "String Operations and Functions"
+              }
+            ]
+          },
+          {
+            "id": "1.3",
+            "title": "Matrices",
+            "layer_3": [
+              {
+                "id": "1.3.1",
+                "title": "Matrices as Arrays of Arrays"
+              },
+              {
+                "id": "1.3.2",
+                "title": "Multi-dimensional Matrices"
+              },
+              {
+                "id": "1.3.3",
+                "title": "Matrix Indexing and Access"
+              }
+            ]
+          },
+          {
+            "id": "1.4",
+            "title": "Structs and Compound Data Structures",
+            "layer_3": [
+              {
+                "id": "1.4.1",
+                "title": "Struct Definition and Usage"
+              },
+              {
+                "id": "1.4.2",
+                "title": "Arrays of Structs"
+              },
+              {
+                "id": "1.4.3",
+                "title": "Limitations of Arrays and Structs"
+              }
+            ]
+          },
+          {
+            "id": "1.5",
+            "title": "Linked Lists",
+            "layer_3": [
+              {
+                "id": "1.5.1",
+                "title": "Nodes and Pointers"
+              },
+              {
+                "id": "1.5.2",
+                "title": "Memory Representation of Linked Lists"
+              },
+              {
+                "id": "1.5.3",
+                "title": "Advantages of Linked Lists: Dynamic Size and Reordering"
+              },
+              {
+                "id": "1.5.4",
+                "title": "Circular Linked Lists"
+              }
+            ]
+          },
+          {
+            "id": "1.6",
+            "title": "Queues and Stacks",
+            "layer_3": [
+              {
+                "id": "1.6.1",
+                "title": "Queues (FIFO)"
+              },
+              {
+                "id": "1.6.2",
+                "title": "Stacks (LIFO)"
+              }
+            ]
+          },
+          {
+            "id": "1.7",
+            "title": "Trees and Graphs",
+            "layer_3": [
+              {
+                "id": "1.7.1",
+                "title": "Trees: Root, Children, Parent, Leaf Nodes"
+              },
+              {
+                "id": "1.7.2",
+                "title": "Binary Trees"
+              },
+              {
+                "id": "1.7.3",
+                "title": "Graphs: Arbitrary Connections"
+              }
+            ]
+          },
+          {
+            "id": "1.8",
+            "title": "Conclusion and Further Exploration",
+            "layer_3": [
+              {
+                "id": "1.8.1",
+                "title": "Importance of Choosing the Right Data Structure"
+              },
+              {
+                "id": "1.8.2",
+                "title": "Using Pre-built Libraries"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "detailed_breakdown": [
+    {
+      "id": "1.1.1",
+      "timestamp": "0:42-1:30",
+      "category": "definition",
+      "subcategory": "array_memory",
+      "detail": "Introduces arrays, lists, vectors; explains how they store series of values in memory, using the example of J = [5, 10, 3, 8, 1, 4, 2] stored at memory location 1000.  Explains memory offsets and index access (starting from 0).  Highlights the difference between array index and position in the sequence."
+    },
+    {
+      "id": "1.1.2",
+      "timestamp": "1:30-2:00",
+      "category": "method",
+      "subcategory": "array_access",
+      "detail": "Details array access using index notation (e.g., J[0], J[5]).  Emphasizes the importance of understanding that index 0 represents the first element. Illustrates how to access and manipulate array elements with example code (adding values at specific indices)."
+    },
+    {
+      "id": "1.1.3",
+      "timestamp": "2:00-2:48",
+      "category": "example",
+      "subcategory": "array_functions",
+      "detail": "Discusses the versatility of arrays and built-in sort functions, highlighting how using a built-in function eliminates writing sorting algorithms from scratch.  Emphasizes that this is available in most programming languages."
+    },
+    {
+      "id": "1.2.1",
+      "timestamp": "2:48-3:15",
+      "category": "definition",
+      "subcategory": "string_representation",
+      "detail": "Defines strings as arrays of characters (letters, numbers, symbols).  Refers back to episode 4 for character storage. Explains how strings are declared in code (using quotes)."
+    },
+    {
+      "id": "1.2.2",
+      "timestamp": "3:15-3:45",
+      "category": "visualization",
+      "subcategory": "string_memory",
+      "detail": "Visualizes string memory representation, showing characters stored sequentially and terminated by a null character (binary value zero). Emphasizes that the null character signals the end of the string to functions like 'print'."
+    },
+    {
+      "id": "1.2.3",
+      "timestamp": "3:45-4:09",
+      "category": "example",
+      "subcategory": "string_functions",
+      "detail": "Gives examples of string functions, such as string concatenation ('string cat'), which combines two strings."
+    },
+    {
+      "id": "1.3.1",
+      "timestamp": "4:09-4:30",
+      "category": "definition",
+      "subcategory": "matrix_representation",
+      "detail": "Introduces matrices as two-dimensional arrays, using the analogy of a spreadsheet or pixels on a screen. Explains that a matrix is an array of arrays."
+    },
+    {
+      "id": "1.3.2",
+      "timestamp": "4:30-4:45",
+      "category": "example",
+      "subcategory": "matrix_initialization",
+      "detail": "Illustrates how to initialize a 3x3 matrix in code and shows its memory layout."
+    },
+    {
+      "id": "1.3.3",
+      "timestamp": "4:45-5:19",
+      "category": "method",
+      "subcategory": "matrix_access",
+      "detail": "Explains two-dimensional matrix indexing (e.g., J[2][1]), demonstrating how to access elements using two indices. Extends the concept to higher dimensions (five-dimensional matrix example)."
+    },
+    {
+      "id": "1.4.1",
+      "timestamp": "5:19-5:45",
+      "category": "definition",
+      "subcategory": "struct_definition",
+      "detail": "Introduces structs as a way to group related variables, such as bank account number and balance.  Explains how structs create compound data structures."
+    },
+    {
+      "id": "1.4.2",
+      "timestamp": "5:45-6:00",
+      "category": "example",
+      "subcategory": "array_of_structs",
+      "detail": "Shows how to create arrays of structs, explaining how these are stored together in memory."
+    },
+    {
+      "id": "1.4.3",
+      "timestamp": "6:00-6:15",
+      "category": "transition",
+      "subcategory": "limitations_arrays",
+      "detail": "Highlights limitations of arrays: fixed size and sequential storage, making adding items in the middle difficult."
+    },
+    {
+      "id": "1.5.1",
+      "timestamp": "6:15-6:30",
+      "category": "definition",
+      "subcategory": "node_struct",
+      "detail": "Introduces the concept of a 'node' struct containing a variable and a pointer."
+    },
+    {
+      "id": "1.5.2",
+      "timestamp": "6:30-7:03",
+      "category": "visualization",
+      "subcategory": "linked_list_memory",
+      "detail": "Visualizes a linked list in memory, showing nodes (with data and pointers) potentially scattered because of dynamic memory allocation.  Shows how pointers link nodes together to form a list; explains how a circular linked list is formed and how a null pointer signals the end of a linked list."
+    },
+    {
+      "id": "1.5.3",
+      "timestamp": "7:03-7:30",
+      "category": "extension",
+      "subcategory": "linked_list_advantages",
+      "detail": "Contrasts linked lists with arrays, emphasizing the advantages of dynamic size and easy reordering."
+    },
+    {
+      "id": "1.5.4",
+      "timestamp": "7:30-7:45",
+      "category": "example",
+      "subcategory": "circular_linked_list",
+      "detail": "Illustrates a circular linked list, mentioning how pointers connect nodes back to earlier nodes in the list."
+    },
+    {
+      "id": "1.6.1",
+      "timestamp": "8:59-9:30",
+      "category": "definition",
+      "subcategory": "queue_fifo",
+      "detail": "Introduces queues using the analogy of a post office line (FIFO - First In, First Out).  Explains the concepts of enqueue (adding to the queue) and dequeue (removing from the queue) using pointer manipulation."
+    },
+    {
+      "id": "1.6.2",
+      "timestamp": "9:30-10:23",
+      "category": "definition",
+      "subcategory": "stack_lifo",
+      "detail": "Introduces stacks using the analogy of a stack of pancakes (LIFO - Last In, First Out). Explains the concepts of push (adding to the stack) and pop (removing from the stack)."
+    },
+    {
+      "id": "1.7.1",
+      "timestamp": "10:23-10:50",
+      "category": "definition",
+      "subcategory": "tree_structure",
+      "detail": "Introduces tree data structures, defining root, child, parent, and leaf nodes. Uses a family tree example to illustrate these terms (Thomas Jefferson and Aaron Burr example)."
+    },
+    {
+      "id": "1.7.2",
+      "timestamp": "10:50-11:15",
+      "category": "definition",
+      "subcategory": "binary_tree",
+      "detail": "Defines binary trees as trees where nodes can have up to two children."
+    },
+    {
+      "id": "1.7.3",
+      "timestamp": "11:15-12:08",
+      "category": "definition",
+      "subcategory": "graph_structure",
+      "detail": "Introduces graphs, explaining how they differ from trees, allowing arbitrary connections between nodes, and revisiting the city-road graph example from a previous episode."
+    },
+    {
+      "id": "1.8.1",
+      "timestamp": "12:08-12:45",
+      "category": "conclusion",
+      "subcategory": "data_structure_selection",
+      "detail": "Summarizes the fundamental data structures covered, emphasizing that the choice of data structure is crucial for efficient computation.  Mentions more advanced data structures (red-black trees, heaps) that were not covered due to time constraints."
+    },
+    {
+      "id": "1.8.2",
+      "timestamp": "12:45-13:16",
+      "category": "conclusion",
+      "subcategory": "using_libraries",
+      "detail": "Encourages the use of pre-built data structure libraries (C++ STL, Java Class Library) to save time and leverage existing functionality."
+    }
+  ]
+}

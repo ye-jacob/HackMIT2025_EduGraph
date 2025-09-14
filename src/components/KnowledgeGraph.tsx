@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState, useCallback } from 'react';
 import * as d3 from 'd3';
 import { GraphNode, GraphEdge } from './EduGraph';
-import { ZoomIn, ZoomOut, RotateCcw, Search } from 'lucide-react';
+import { ZoomIn, ZoomOut, RotateCcw, Search, Network } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 
@@ -43,20 +43,23 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
     const svg = d3.select(svgRef.current);
     svg.selectAll('*').remove();
 
-    const width = 600;
-    const height = 400;
+    // Get the container dimensions
+    const container = svgRef.current.parentElement;
+    const containerRect = container?.getBoundingClientRect();
+    const width = containerRect?.width || 600;
+    const height = containerRect?.height || 400;
     
     const zoom = d3.zoom<SVGSVGElement, unknown>()
       .scaleExtent([0.1, 4])
       .on('zoom', (event) => {
-        container.attr('transform', event.transform);
+        graphContainer.attr('transform', event.transform);
         setZoomLevel(event.transform.k);
       });
 
     svg.call(zoom);
     zoomRef.current = zoom;
 
-    const container = svg.append('g');
+    const graphContainer = svg.append('g');
 
     // Create simulation
     const simulation = d3.forceSimulation<GraphNode>(filteredNodes)
@@ -71,7 +74,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
     simulationRef.current = simulation;
 
     // Create edges
-    const link = container
+    const link = graphContainer
       .selectAll('.link')
       .data(filteredEdges)
       .enter()
@@ -98,7 +101,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
       .attr('opacity', 0.6);
 
     // Create node groups
-    const nodeGroups = container
+    const nodeGroups = graphContainer
       .selectAll('.node-group')
       .data(filteredNodes)
       .enter()
@@ -315,12 +318,26 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
     initializeGraph();
   }, [initializeGraph]);
 
+  // Handle resize events
+  useEffect(() => {
+    const handleResize = () => {
+      if (svgRef.current) {
+        initializeGraph();
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => window.removeEventListener('resize', handleResize);
+  }, [initializeGraph]);
+
   // Auto-focus on selected node when it changes
   useEffect(() => {
     if (selectedNode && svgRef.current && zoomRef.current) {
       const svg = d3.select(svgRef.current);
-      const width = 600;
-      const height = 400;
+      const container = svgRef.current.parentElement;
+      const containerRect = container?.getBoundingClientRect();
+      const width = containerRect?.width || 600;
+      const height = containerRect?.height || 400;
       
       // Wait a bit for the simulation to settle
       setTimeout(() => {
@@ -330,9 +347,10 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
   }, [selectedNode]);
 
   return (
-    <div className="graph-container bg-card rounded-lg border border-border shadow-lg overflow-hidden flex flex-col h-full">
+    <div className={`graph-container bg-card rounded-lg border border-border shadow-lg overflow-hidden flex flex-col h-full`}>
       {/* Graph Controls */}
       <div className="flex items-center justify-between p-4 border-b border-border bg-muted/30">
+        <Network className="h-5 w-5" />
         <h3 className="text-lg font-semibold text-foreground">Knowledge Graph</h3>
         
         <div className="flex items-center gap-2">
@@ -388,7 +406,6 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
           width="100%"
           height="100%"
           className="bg-card"
-          style={{ minHeight: '500px', height: 'calc(100vh - 200px)' }}
         />
         
         {/* Legend */}

@@ -161,13 +161,35 @@ CRITICAL REQUIREMENTS:
 10. Create MANY detailed breakdown segments (aim for 20+ segments)
 11. Each segment should be 30-60 seconds of content
 12. Include specific details and examples in the descriptions
+13. Do not include any escape characters in the JSON. Make sure the JSON is valid.
 
 Return ONLY the JSON object, no additional text or formatting.
     `;
     
-    const result = await model.generateContent(prompt);
-    const response = await result.response;
-    const text = response.text();
+    console.log('Sending request to AI model for transcript structuring...');
+    
+    // Retry mechanism for AI calls
+    let result, response, text;
+    let retryCount = 0;
+    const maxRetries = 2;
+    
+    while (retryCount <= maxRetries) {
+      try {
+        result = await model.generateContent(prompt);
+        response = await result.response;
+        text = response.text();
+        console.log('Received AI response, length:', text.length);
+        break;
+      } catch (aiError) {
+        retryCount++;
+        console.error(`AI call attempt ${retryCount} failed:`, aiError.message);
+        if (retryCount > maxRetries) {
+          throw new Error(`AI model failed after ${maxRetries + 1} attempts: ${aiError.message}`);
+        }
+        // Wait before retry
+        await new Promise(resolve => setTimeout(resolve, 1000 * retryCount));
+      }
+    }
     
     // Clean up the response to extract just the JSON
     let jsonText = text.trim();
@@ -179,7 +201,93 @@ Return ONLY the JSON object, no additional text or formatting.
       jsonText = jsonText.replace(/^```\s*/, '').replace(/\s*```$/, '');
     }
     
-    return JSON.parse(jsonText);
+    // Additional JSON cleaning to handle common AI response issues
+    jsonText = jsonText
+      // Remove any leading/trailing non-JSON text
+      .replace(/^[^{]*/, '')
+      .replace(/[^}]*$/, '')
+      // Remove control characters that break JSON parsing
+      .replace(/[\x00-\x1F\x7F]/g, '')
+      // Fix common escaping issues
+      .replace(/\\n/g, '\\n')
+      .replace(/\\t/g, '\\t')
+      .replace(/\\r/g, '\\r')
+      .replace(/\\0/g, '\\\\0')  // Fix null character escapes
+      // Fix unescaped quotes in strings
+      .replace(/"([^"\\]*(\\.[^"\\]*)*)"/g, (match, content) => {
+        // Clean up the content by properly escaping quotes and backslashes
+        const cleaned = content
+          .replace(/\\/g, '\\\\')  // Escape backslashes first
+          .replace(/"/g, '\\"')    // Then escape quotes
+          .replace(/\n/g, '\\n')   // Convert actual newlines to escaped
+          .replace(/\t/g, '\\t')   // Convert actual tabs to escaped
+          .replace(/\r/g, '\\r')   // Convert actual carriage returns to escaped
+          .replace(/\0/g, '\\\\0'); // Convert null characters to escaped
+        return '"' + cleaned + '"';
+      });
+    
+    try {
+      return JSON.parse(jsonText);
+    } catch (parseError) {
+      console.error('JSON parse error:', parseError.message);
+      const position = parseError.message.match(/position (\d+)/)?.[1];
+      if (position) {
+        const start = Math.max(0, parseInt(position) - 100);
+        const end = parseInt(position) + 100;
+        console.error('Problematic JSON text around position', position, ':', jsonText.substring(start, end));
+        console.error('Character at position', position, ':', jsonText[parseInt(position)]);
+      }
+      
+      // Try to fix common JSON issues
+      let fixedJson = jsonText;
+      
+      // Fix trailing commas
+      fixedJson = fixedJson.replace(/,(\s*[}\]])/g, '$1');
+      
+      // Fix missing quotes around keys
+      fixedJson = fixedJson.replace(/([{,]\s*)([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '$1"$2":');
+      
+      // Try parsing again
+      try {
+        return JSON.parse(fixedJson);
+      } catch (secondError) {
+        console.error('Second JSON parse attempt failed:', secondError.message);
+        
+        // Last resort: create a basic fallback structure
+        console.log('Creating fallback structure due to JSON parsing failure');
+        return {
+          metadata: {
+            source_video: "Unknown",
+            generated_on: new Date().toISOString(),
+            type: "structured_transcript",
+            fallback: true
+          },
+          lecture_info: {
+            course: "Unknown Course",
+            lecture_number: 1,
+            instructor: "Unknown",
+            title: "Lecture Content"
+          },
+          hierarchical_structure: {
+            layer_1: [{
+              id: "1",
+              title: "Main Topic",
+              layer_2: [{
+                id: "1.1",
+                title: "Sub-topic",
+                layer_3: [{
+                  id: "1.1.1",
+                  title: "Key Concept",
+                  timestamps: "0:60",
+                  description: "Content could not be properly parsed from AI response",
+                  category: "definition"
+                }]
+              }]
+            }]
+          }
+        };
+      }
+    }
     
   } catch (error) {
     console.error('Structuring error:', error);
@@ -443,6 +551,77 @@ app.post('/api/process-video', upload.single('video'), async (req, res) => {
     console.error('Processing error:', error);
     res.status(500).json({ 
       error: 'Video processing failed', 
+      details: error.message 
+    });
+  }
+});
+
+// Get all videos endpoint
+app.get('/api/videos', (req, res) => {
+  try {
+    const uploadsDir = path.join(__dirname, 'uploads');
+    const files = fs.readdirSync(uploadsDir);
+    
+    const videos = [];
+    const processedVideos = [];
+    
+    // Get all video files
+    files.forEach(file => {
+      if (file.endsWith('.mp4') || file.endsWith('.webm') || file.endsWith('.mov')) {
+        const videoId = file.split('-')[1]; // Extract ID from filename
+        videos.push({
+          id: videoId,
+          filename: file,
+          path: `/uploads/${file}`,
+          type: 'video'
+        });
+      }
+    });
+    
+    // Get all JSON data files from root directory
+    const rootDir = path.join(__dirname, '..');
+    const rootFiles = fs.readdirSync(rootDir);
+    
+    rootFiles.forEach(file => {
+      if (file.includes('_graph_data.json')) {
+        try {
+          const filePath = path.join(rootDir, file);
+          const fileContent = fs.readFileSync(filePath, 'utf8');
+          const data = JSON.parse(fileContent);
+          const videoId = file.split('_')[0] + '_' + file.split('_')[1] + '_' + file.split('_')[2];
+          processedVideos.push({
+            id: videoId,
+            filename: file,
+            title: data.metadata?.source_video || file.replace('_graph_data.json', ''),
+            nodes: data.nodes || [],
+            edges: data.edges || [],
+            metadata: data.metadata || {}
+          });
+        } catch (error) {
+          console.error(`Error reading ${file}:`, error.message);
+          // Add a placeholder entry for corrupted files
+          const videoId = file.split('_')[0] + '_' + file.split('_')[1] + '_' + file.split('_')[2];
+          processedVideos.push({
+            id: videoId,
+            filename: file,
+            title: file.replace('_graph_data.json', ''),
+            nodes: [],
+            edges: [],
+            metadata: { error: 'Corrupted file', source_video: file.replace('_graph_data.json', '') }
+          });
+        }
+      }
+    });
+    
+    res.json({
+      success: true,
+      videos,
+      processedVideos
+    });
+  } catch (error) {
+    console.error('Error fetching videos:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch videos', 
       details: error.message 
     });
   }

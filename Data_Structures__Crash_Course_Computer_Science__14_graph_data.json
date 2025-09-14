@@ -1,0 +1,684 @@
+{
+  "metadata": {
+    "source_video": "Data Structures_ Crash Course Computer Science #14.mp4",
+    "generated_on": "2025-09-14T14:50:03.814Z",
+    "type": "knowledge_graph",
+    "node_count": 32,
+    "edge_count": 31
+  },
+  "nodes": [
+    {
+      "id": "node_0",
+      "label": "Introduction to Data Structures",
+      "x": 475.1397297823968,
+      "y": 306.3747999093787,
+      "size": 20,
+      "color": "hsl(0, 70%, 60%)",
+      "timestamps": [
+        42,
+        90,
+        120,
+        168,
+        195,
+        225,
+        249,
+        270,
+        285,
+        319,
+        345,
+        360,
+        375,
+        390,
+        423,
+        450,
+        539,
+        570,
+        623,
+        650,
+        675,
+        728,
+        765
+      ],
+      "description": "Introduces arrays, lists, vectors; explains how they store series of values in memory, using the example of J = [5, 10, 3, 8, 1, 4, 2] stored at memory location 1000.  Explains memory offsets and index access (starting from 0).  Highlights the difference between array index and position in the sequence.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_1",
+      "label": "Arrays and Lists",
+      "x": 479.6845292570784,
+      "y": 199.97802111851962,
+      "size": 17,
+      "color": "hsl(60, 70%, 60%)",
+      "timestamps": [
+        42,
+        90,
+        120
+      ],
+      "description": "Introduces arrays, lists, vectors; explains how they store series of values in memory, using the example of J = [5, 10, 3, 8, 1, 4, 2] stored at memory location 1000.  Explains memory offsets and index access (starting from 0).  Highlights the difference between array index and position in the sequence.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_2",
+      "label": "Array Definition and Memory Representation",
+      "x": 329.36874430497164,
+      "y": 170.60450254624374,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        42
+      ],
+      "description": "Introduces arrays, lists, vectors; explains how they store series of values in memory, using the example of J = [5, 10, 3, 8, 1, 4, 2] stored at memory location 1000.  Explains memory offsets and index access (starting from 0).  Highlights the difference between array index and position in the sequence.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_3",
+      "label": "Array Indexing and Access",
+      "x": 120.36059572399624,
+      "y": 163.3698354246451,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        90
+      ],
+      "description": "Details array access using index notation (e.g., J[0], J[5]).  Emphasizes the importance of understanding that index 0 represents the first element. Illustrates how to access and manipulate array elements with example code (adding values at specific indices).",
+      "category": "application",
+      "isActive": false
+    },
+    {
+      "id": "node_4",
+      "label": "Array Operations and Built-in Functions",
+      "x": 486.6389655321067,
+      "y": 206.71696436264602,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        120
+      ],
+      "description": "Discusses the versatility of arrays and built-in sort functions, highlighting how using a built-in function eliminates writing sorting algorithms from scratch.  Emphasizes that this is available in most programming languages.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_5",
+      "label": "Strings",
+      "x": 490.7200020603515,
+      "y": 131.6379332740418,
+      "size": 17,
+      "color": "hsl(90, 70%, 60%)",
+      "timestamps": [
+        168,
+        195,
+        225
+      ],
+      "description": "Defines strings as arrays of characters (letters, numbers, symbols).  Refers back to episode 4 for character storage. Explains how strings are declared in code (using quotes).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_6",
+      "label": "Strings as Arrays of Characters",
+      "x": 158.63226753919594,
+      "y": 176.50777672261955,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        168
+      ],
+      "description": "Defines strings as arrays of characters (letters, numbers, symbols).  Refers back to episode 4 for character storage. Explains how strings are declared in code (using quotes).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_7",
+      "label": "Null Character Termination",
+      "x": 119.16462938312353,
+      "y": 287.823114166662,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        195
+      ],
+      "description": "Visualizes string memory representation, showing characters stored sequentially and terminated by a null character (binary value zero). Emphasizes that the null character signals the end of the string to functions like 'print'.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_8",
+      "label": "String Operations and Functions",
+      "x": 126.63711254214248,
+      "y": 255.86556926774279,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        225
+      ],
+      "description": "Gives examples of string functions, such as string concatenation ('string cat'), which combines two strings.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_9",
+      "label": "Matrices",
+      "x": 142.21165460684279,
+      "y": 382.4868357344613,
+      "size": 17,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        249,
+        270,
+        285
+      ],
+      "description": "Introduces matrices as two-dimensional arrays, using the analogy of a spreadsheet or pixels on a screen. Explains that a matrix is an array of arrays.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_10",
+      "label": "Matrices as Arrays of Arrays",
+      "x": 317.8284826489864,
+      "y": 187.85311662110632,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        249
+      ],
+      "description": "Introduces matrices as two-dimensional arrays, using the analogy of a spreadsheet or pixels on a screen. Explains that a matrix is an array of arrays.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_11",
+      "label": "Multi-dimensional Matrices",
+      "x": 279.6233988220282,
+      "y": 169.01170055579178,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        270
+      ],
+      "description": "Illustrates how to initialize a 3x3 matrix in code and shows its memory layout.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_12",
+      "label": "Matrix Indexing and Access",
+      "x": 209.1308619467255,
+      "y": 359.1158974199007,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        285
+      ],
+      "description": "Explains two-dimensional matrix indexing (e.g., J[2][1]), demonstrating how to access elements using two indices. Extends the concept to higher dimensions (five-dimensional matrix example).",
+      "category": "application",
+      "isActive": false
+    },
+    {
+      "id": "node_13",
+      "label": "Structs and Compound Data Structures",
+      "x": 152.97845474199923,
+      "y": 138.20180395403548,
+      "size": 17,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        319,
+        345,
+        360
+      ],
+      "description": "Introduces structs as a way to group related variables, such as bank account number and balance.  Explains how structs create compound data structures.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_14",
+      "label": "Struct Definition and Usage",
+      "x": 391.39846470210114,
+      "y": 340.2215839508568,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        319
+      ],
+      "description": "Introduces structs as a way to group related variables, such as bank account number and balance.  Explains how structs create compound data structures.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_15",
+      "label": "Arrays of Structs",
+      "x": 262.7776679923288,
+      "y": 266.8160974798767,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        345
+      ],
+      "description": "Shows how to create arrays of structs, explaining how these are stored together in memory.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_16",
+      "label": "Limitations of Arrays and Structs",
+      "x": 489.63585480338816,
+      "y": 256.20466279461493,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        360
+      ],
+      "description": "Highlights limitations of arrays: fixed size and sequential storage, making adding items in the middle difficult.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_17",
+      "label": "Linked Lists",
+      "x": 496.8439344173332,
+      "y": 348.6177685562421,
+      "size": 17,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        375,
+        390,
+        423,
+        450
+      ],
+      "description": "Introduces the concept of a 'node' struct containing a variable and a pointer.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_18",
+      "label": "Nodes and Pointers",
+      "x": 424.89327903831304,
+      "y": 255.362294524016,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        375
+      ],
+      "description": "Introduces the concept of a 'node' struct containing a variable and a pointer.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_19",
+      "label": "Memory Representation of Linked Lists",
+      "x": 232.460790822868,
+      "y": 123.01541920242028,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        390
+      ],
+      "description": "Visualizes a linked list in memory, showing nodes (with data and pointers) potentially scattered because of dynamic memory allocation.  Shows how pointers link nodes together to form a list; explains how a circular linked list is formed and how a null pointer signals the end of a linked list.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_20",
+      "label": "Advantages of Linked Lists: Dynamic Size and Reordering",
+      "x": 442.94107484092586,
+      "y": 290.1005775031582,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        423
+      ],
+      "description": "Contrasts linked lists with arrays, emphasizing the advantages of dynamic size and easy reordering.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_21",
+      "label": "Circular Linked Lists",
+      "x": 297.2638620972458,
+      "y": 279.1315174931518,
+      "size": 14,
+      "color": "hsl(210, 70%, 60%)",
+      "timestamps": [
+        450
+      ],
+      "description": "Illustrates a circular linked list, mentioning how pointers connect nodes back to earlier nodes in the list.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_22",
+      "label": "Queues and Stacks",
+      "x": 489.21452164417445,
+      "y": 161.75261737434585,
+      "size": 17,
+      "color": "hsl(210, 70%, 60%)",
+      "timestamps": [
+        539,
+        570
+      ],
+      "description": "Introduces queues using the analogy of a post office line (FIFO - First In, First Out).  Explains the concepts of enqueue (adding to the queue) and dequeue (removing from the queue) using pointer manipulation.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_23",
+      "label": "Queues (FIFO)",
+      "x": 439.49838074473854,
+      "y": 332.8835190239987,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        539
+      ],
+      "description": "Introduces queues using the analogy of a post office line (FIFO - First In, First Out).  Explains the concepts of enqueue (adding to the queue) and dequeue (removing from the queue) using pointer manipulation.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_24",
+      "label": "Stacks (LIFO)",
+      "x": 133.63008694195634,
+      "y": 318.01407614893765,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        570
+      ],
+      "description": "Introduces stacks using the analogy of a stack of pancakes (LIFO - Last In, First Out). Explains the concepts of push (adding to the stack) and pop (removing from the stack).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_25",
+      "label": "Trees and Graphs",
+      "x": 407.916851828753,
+      "y": 130.4551029900383,
+      "size": 17,
+      "color": "hsl(240, 70%, 60%)",
+      "timestamps": [
+        623,
+        650,
+        675
+      ],
+      "description": "Introduces tree data structures, defining root, child, parent, and leaf nodes. Uses a family tree example to illustrate these terms (Thomas Jefferson and Aaron Burr example).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_26",
+      "label": "Trees: Root, Children, Parent, Leaf Nodes",
+      "x": 482.5962141511872,
+      "y": 205.65349036426997,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        623
+      ],
+      "description": "Introduces tree data structures, defining root, child, parent, and leaf nodes. Uses a family tree example to illustrate these terms (Thomas Jefferson and Aaron Burr example).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_27",
+      "label": "Binary Trees",
+      "x": 432.4896086469511,
+      "y": 185.60033253051807,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        650
+      ],
+      "description": "Defines binary trees as trees where nodes can have up to two children.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_28",
+      "label": "Graphs: Arbitrary Connections",
+      "x": 212.85251788302196,
+      "y": 126.76852083263945,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        675
+      ],
+      "description": "Introduces graphs, explaining how they differ from trees, allowing arbitrary connections between nodes, and revisiting the city-road graph example from a previous episode.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_29",
+      "label": "Conclusion and Further Exploration",
+      "x": 255.7689781063872,
+      "y": 346.69365844183847,
+      "size": 17,
+      "color": "hsl(270, 70%, 60%)",
+      "timestamps": [
+        728,
+        765
+      ],
+      "description": "Summarizes the fundamental data structures covered, emphasizing that the choice of data structure is crucial for efficient computation.  Mentions more advanced data structures (red-black trees, heaps) that were not covered due to time constraints.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_30",
+      "label": "Importance of Choosing the Right Data Structure",
+      "x": 168.38367487188935,
+      "y": 324.9139646085006,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        728
+      ],
+      "description": "Summarizes the fundamental data structures covered, emphasizing that the choice of data structure is crucial for efficient computation.  Mentions more advanced data structures (red-black trees, heaps) that were not covered due to time constraints.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_31",
+      "label": "Using Pre-built Libraries",
+      "x": 122.82236427941653,
+      "y": 255.53945597990028,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        765
+      ],
+      "description": "Encourages the use of pre-built data structure libraries (C++ STL, Java Class Library) to save time and leverage existing functionality.",
+      "category": "definition",
+      "isActive": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_0",
+      "target": "node_1",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_2",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_3",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_4",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_5",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_6",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_7",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_8",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_9",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_10",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_11",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_12",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_13",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_13",
+      "target": "node_14",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_13",
+      "target": "node_15",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_13",
+      "target": "node_16",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_17",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_17",
+      "target": "node_18",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_17",
+      "target": "node_19",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_17",
+      "target": "node_20",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_17",
+      "target": "node_21",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_22",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_22",
+      "target": "node_23",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_22",
+      "target": "node_24",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_25",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_25",
+      "target": "node_26",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_25",
+      "target": "node_27",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_25",
+      "target": "node_28",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_29",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_29",
+      "target": "node_30",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_29",
+      "target": "node_31",
+      "type": "related",
+      "strength": 0.7
+    }
+  ]
+}

@@ -302,7 +302,6 @@ export const EduGraph: React.FC = () => {
   if (!videoData) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
         <VideoUpload 
           onUpload={handleVideoUpload} 
           isProcessing={isProcessing}
@@ -350,7 +349,6 @@ const EduGraphContent: React.FC<EduGraphContentProps> = ({
 
   return (
     <div className="min-h-screen bg-background flex flex-col w-full">
-      <Header />
       
       <div className="flex flex-1">
         <div className="transition-all duration-300 flex flex-col" style={{ width: open ? '50vw' : '100vw' }}>
@@ -389,14 +387,8 @@ const EduGraphContent: React.FC<EduGraphContentProps> = ({
           className="border-l bg-background transition-all duration-300 overflow-hidden flex flex-col"
           style={{ width: open ? '50vw' : '0px' }}
         >
-          <div className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background flex-shrink-0">
-            <div className="flex items-center gap-2">
-              <Network className="h-5 w-5" />
-              <h2 className="font-semibold">Knowledge Graph</h2>
-            </div>
-            <SidebarTrigger />
-          </div>
-          <div className="flex-1 flex flex-col bg-background">
+          
+          <div className="flex-1 flex flex-col bg-background h-full">
             {/* Knowledge Graph Area */}
             <div className="flex-1 overflow-y-auto">
               <div className="p-4 h-full">

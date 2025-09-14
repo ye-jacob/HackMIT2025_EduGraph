@@ -1,0 +1,314 @@
+{
+  "metadata": {
+    "source_video": "Intro to Algorithms_ Crash Course Computer Science #13.mp4",
+    "generated_on": "2025-09-14T14:56:30.229Z",
+    "type": "knowledge_graph",
+    "node_count": 13,
+    "edge_count": 12
+  },
+  "nodes": [
+    {
+      "id": "node_0",
+      "label": "Introduction to Algorithms",
+      "x": 231.60124595223382,
+      "y": 173.2206789219506,
+      "size": 20,
+      "color": "hsl(0, 70%, 60%)",
+      "timestamps": [
+        0,
+        30,
+        60,
+        76,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        330,
+        360,
+        390,
+        420,
+        450,
+        480,
+        510,
+        540,
+        570
+      ],
+      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_1",
+      "label": "What is an Algorithm?",
+      "x": 184.34721822379424,
+      "y": 221.41900380757534,
+      "size": 17,
+      "color": "hsl(60, 70%, 60%)",
+      "timestamps": [
+        0,
+        30,
+        60
+      ],
+      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_2",
+      "label": "Definition and Importance",
+      "x": 218.7253999733044,
+      "y": 237.05831811421191,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        0
+      ],
+      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_3",
+      "label": "Example: Calculating Exponents",
+      "x": 371.06302128361284,
+      "y": 103.48987068797892,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        30
+      ],
+      "description": "Provides an example of calculating exponents using functions and highlights that different algorithms can achieve the same result with varying efficiency. Introduces the concept of algorithmic efficiency based on steps and memory usage.",
+      "category": "example",
+      "isActive": false
+    },
+    {
+      "id": "node_4",
+      "label": "Algorithmic Efficiency",
+      "x": 444.31125891500096,
+      "y": 366.9019784838702,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        60
+      ],
+      "description": "Explains the origin of the term \\\"algorithm\\\" from the Persian mathematician Muhammad ibn Musa al-Khwarizmi and its connection to algebra and computer science.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_5",
+      "label": "Sorting Algorithms",
+      "x": 257.08491114383446,
+      "y": 240.1708462511363,
+      "size": 17,
+      "color": "hsl(90, 70%, 60%)",
+      "timestamps": [
+        76,
+        120,
+        150,
+        180,
+        210,
+        240,
+        270,
+        300,
+        330,
+        360
+      ],
+      "description": "Transitions to the topic of sorting algorithms, highlighting its prevalence in computer science applications (airfare, email sorting, contact lists).  Introduces the idea that many sorting algorithms exist.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_6",
+      "label": "Selection Sort",
+      "x": 211.8500390101201,
+      "y": 236.09822748675202,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        76,
+        120,
+        150
+      ],
+      "description": "Transitions to the topic of sorting algorithms, highlighting its prevalence in computer science applications (airfare, email sorting, contact lists).  Introduces the idea that many sorting algorithms exist.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_7",
+      "label": "Merge Sort",
+      "x": 183.23578964036045,
+      "y": 280.28824973096573,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        270,
+        300,
+        330,
+        360
+      ],
+      "description": "Transitions to a more efficient sorting algorithm: merge sort.  Highlights the inefficiency of O(n^2) for large datasets.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_8",
+      "label": "Big O Notation and Complexity Analysis",
+      "x": 465.4514442183806,
+      "y": 118.95582826244856,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        180,
+        210,
+        240
+      ],
+      "description": "Presents pseudocode for the selection sort algorithm. Emphasizes the reusability of the function for different array sizes.",
+      "category": "application",
+      "isActive": false
+    },
+    {
+      "id": "node_9",
+      "label": "Graph Search Algorithms",
+      "x": 366.5095484582424,
+      "y": 197.2125497108907,
+      "size": 17,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        390,
+        420,
+        450,
+        480,
+        510,
+        540,
+        570
+      ],
+      "description": "Transitions to the topic of graph search algorithms. Introduces the concept of a graph as a network of nodes and edges, using a map with cities and roads as an example.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_10",
+      "label": "Introduction to Graphs",
+      "x": 235.23085991095635,
+      "y": 172.12804173436953,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        390,
+        420
+      ],
+      "description": "Transitions to the topic of graph search algorithms. Introduces the concept of a graph as a network of nodes and edges, using a map with cities and roads as an example.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_11",
+      "label": "Dijkstra's Algorithm",
+      "x": 380.9823440072849,
+      "y": 117.25309503381513,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        450,
+        480,
+        510
+      ],
+      "description": "Discusses a brute-force approach to graph search and its high complexity (O(n!)).  Contrasts it with more efficient algorithms.",
+      "category": "application",
+      "isActive": false
+    },
+    {
+      "id": "node_12",
+      "label": "Complexity Analysis and Improvements",
+      "x": 335.5525574970054,
+      "y": 384.38211979759046,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        540,
+        570
+      ],
+      "description": "Analyzes the original complexity of Dijkstra's algorithm (O(n^2)) and its improved version (O(n log n + m), where m is the number of edges). Shows the improvement in the example graph.",
+      "category": "definition",
+      "isActive": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_0",
+      "target": "node_1",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_2",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_3",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_4",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_5",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_6",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_7",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_5",
+      "target": "node_8",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_9",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_10",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_11",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_9",
+      "target": "node_12",
+      "type": "related",
+      "strength": 0.7
+    }
+  ]
+}
