@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { KnowledgeGraph } from './KnowledgeGraph';
+import { HierarchicalGraph } from './HierarchicalGraph';
 import { GraphNode, GraphEdge } from './EduGraph';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
@@ -267,14 +267,14 @@ export const Home: React.FC<HomeProps> = ({ onVideoClick, onNavigateToVideo }) =
           </div>
         )}
 
-        {/* Combined Knowledge Graph */}
+        {/* Hierarchical Knowledge Graph */}
         {combinedNodes.length > 0 ? (
           <div className="mb-8">
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              Combined Knowledge Graph
+              Course Knowledge Overview
             </h2>
             <div className="h-[600px] border border-border rounded-lg overflow-hidden">
-              <KnowledgeGraph
+              <HierarchicalGraph
                 nodes={combinedNodes}
                 edges={combinedEdges}
                 onNodeClick={handleNodeClick}
