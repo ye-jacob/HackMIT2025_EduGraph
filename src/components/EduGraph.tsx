@@ -15,6 +15,7 @@ import {
   useSidebar 
 } from './ui/sidebar';
 import { Button } from './ui/button';
+import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Network } from 'lucide-react';
 
 export interface GraphNode {
@@ -282,71 +283,117 @@ export const EduGraph: React.FC = () => {
 
   return (
     <SidebarProvider defaultOpen={false}>
-      <div className="min-h-screen bg-background flex flex-col w-full">
-        <Header />
-        
-        <div className="flex flex-1">
-          <SidebarInset className="flex-1">
-            <div className="flex flex-col gap-4 p-4 h-full">
-              <div className="flex items-center justify-between gap-2 pb-2 border-b">
-                <h1 className="text-lg font-semibold">Educational Video Player</h1>
-                <SidebarTrigger className="ml-auto">
-                  <Button variant="outline" size="sm" className="gap-2">
-                    <Network className="h-4 w-4" />
-                    Knowledge Graph
-                  </Button>
-                </SidebarTrigger>
-              </div>
-              
-              <div className="flex-1 flex flex-col gap-4">
-                <VideoPlayer
-                  videoUrl={videoData.url}
-                  title={videoData.title}
-                  duration={videoData.duration}
-                  currentTime={currentTime}
-                  onTimeUpdate={handleTimeUpdate}
-                  concepts={videoData.nodes}
-                />
-                
-                <ConceptTimeline
-                  duration={videoData.duration}
-                  currentTime={currentTime}
-                  concepts={videoData.nodes}
-                  onClick={handleTimelineClick}
-                />
-              </div>
+      <EduGraphContent 
+        videoData={videoData}
+        currentTime={currentTime}
+        selectedNode={selectedNode}
+        onTimeUpdate={handleTimeUpdate}
+        onNodeClick={handleNodeClick}
+        onTimelineClick={handleTimelineClick}
+        onSelectedNodeChange={setSelectedNode}
+      />
+    </SidebarProvider>
+  );
+};
+
+interface EduGraphContentProps {
+  videoData: VideoData;
+  currentTime: number;
+  selectedNode: GraphNode | null;
+  onTimeUpdate: (time: number) => void;
+  onNodeClick: (node: GraphNode) => void;
+  onTimelineClick: (time: number) => void;
+  onSelectedNodeChange: (node: GraphNode | null) => void;
+}
+
+const EduGraphContent: React.FC<EduGraphContentProps> = ({
+  videoData,
+  currentTime,
+  selectedNode,
+  onTimeUpdate,
+  onNodeClick,
+  onTimelineClick,
+  onSelectedNodeChange
+}) => {
+  const { open } = useSidebar();
+
+  return (
+    <div className="min-h-screen bg-background flex flex-col w-full">
+      <Header />
+      
+      <div className="flex flex-1">
+        <div className="transition-all duration-300" style={{ width: open ? '50vw' : '100vw' }}>
+          <div className="flex flex-col gap-4 p-4 h-full">
+            <div className="flex items-center justify-between gap-2 pb-2 border-b">
+              <h1 className="text-lg font-semibold">Educational Video Player</h1>
+              <SidebarTrigger className="ml-auto">
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Network className="h-4 w-4" />
+                  Knowledge Graph
+                </Button>
+              </SidebarTrigger>
             </div>
-          </SidebarInset>
-          
-          <Sidebar side="right" className="border-l bg-background data-[state=open]:w-2/3 data-[state=closed]:w-0 transition-all duration-300">
-            <SidebarHeader className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background">
-              <div className="flex items-center gap-2">
-                <Network className="h-5 w-5" />
-                <h2 className="font-semibold">Knowledge Graph</h2>
-              </div>
-              <SidebarTrigger />
-            </SidebarHeader>
-            <SidebarContent className="p-4 bg-background">
-              <KnowledgeGraph
-                nodes={videoData.nodes}
-                edges={videoData.edges}
-                onNodeClick={handleNodeClick}
-                selectedNode={selectedNode}
+            
+            <div className="flex-1 flex flex-col gap-4">
+              <VideoPlayer
+                videoUrl={videoData.url}
+                title={videoData.title}
+                duration={videoData.duration}
+                currentTime={currentTime}
+                onTimeUpdate={onTimeUpdate}
+                concepts={videoData.nodes}
               />
               
-              {selectedNode && (
-                <div className="mt-4">
-                  <ConceptPanel
-                    concept={selectedNode}
-                    onClose={() => setSelectedNode(null)}
-                    onTimeJump={(time) => setCurrentTime(time)}
+              <ConceptTimeline
+                duration={videoData.duration}
+                currentTime={currentTime}
+                concepts={videoData.nodes}
+                onClick={onTimelineClick}
+              />
+            </div>
+          </div>
+        </div>
+        
+        <div 
+          className="border-l bg-background transition-all duration-300 overflow-hidden"
+          style={{ width: open ? '50vw' : '0px' }}
+        >
+          <div className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background">
+            <div className="flex items-center gap-2">
+              <Network className="h-5 w-5" />
+              <h2 className="font-semibold">Knowledge Graph</h2>
+            </div>
+            <SidebarTrigger />
+          </div>
+          <div className="p-4 bg-background h-full">
+            <Card className="h-full flex flex-col">
+              <CardHeader className="pb-3">
+                <CardTitle className="text-lg">Interactive Knowledge Graph</CardTitle>
+              </CardHeader>
+              <CardContent className="flex-1 flex flex-col p-0">
+                <div className="flex-1 p-4">
+                  <KnowledgeGraph
+                    nodes={videoData.nodes}
+                    edges={videoData.edges}
+                    onNodeClick={onNodeClick}
+                    selectedNode={selectedNode}
                   />
                 </div>
-              )}
-            </SidebarContent>
-          </Sidebar>
+                
+                {selectedNode && (
+                  <div className="p-4 border-t">
+                    <ConceptPanel
+                      concept={selectedNode}
+                      onClose={() => onSelectedNodeChange(null)}
+                      onTimeJump={(time) => onTimeUpdate(time)}
+                    />
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
-    </SidebarProvider>
+    </div>
   );
 };

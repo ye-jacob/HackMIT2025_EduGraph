@@ -281,7 +281,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
   }, [initializeGraph]);
 
   return (
-    <div className="graph-container bg-card rounded-lg border border-border shadow-lg overflow-hidden">
+    <div className="graph-container bg-card rounded-lg border border-border shadow-lg overflow-hidden flex flex-col h-full">
       {/* Graph Controls */}
       <div className="flex items-center justify-between p-4 border-b border-border bg-muted/30">
         <h3 className="text-lg font-semibold text-foreground">Knowledge Graph</h3>
@@ -333,13 +333,13 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
       </div>
 
       {/* Graph SVG */}
-      <div className="relative">
+      <div className="relative flex-1">
         <svg
           ref={svgRef}
           width="100%"
-          height="400"
+          height="100%"
           className="bg-card"
-          style={{ minHeight: '400px' }}
+          style={{ minHeight: '500px', height: 'calc(100vh - 200px)' }}
         />
         
         {/* Legend */}
