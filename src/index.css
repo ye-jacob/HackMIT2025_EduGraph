@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 210 30% 8%;
+    --foreground: 213 31% 91%;
+    --card: 210 25% 11%;
+    --card-foreground: 213 31% 91%;
+    --popover: 210 25% 11%;
+    --popover-foreground: 213 31% 91%;
+    --primary: 213 75% 55%;
+    --primary-foreground: 213 31% 91%;
+    --secondary: 210 20% 15%;
+    --secondary-foreground: 213 31% 91%;
+    --muted: 210 20% 15%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 210 30% 8%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 210 18% 20%;
+    --input: 210 18% 20%;
+    --ring: 213 75% 55%;
+    --radius: 0.75rem;
+    
+    /* Educational theme colors */
+    --concept-primary: 213 75% 55%;
+    --concept-secondary: 25 95% 53%;
+    --concept-tertiary: 142 76% 36%;
+    --concept-accent: 271 81% 56%;
+    
+    /* Graph specific colors */
+    --node-default: 210 20% 15%;
+    --node-active: 213 75% 55%;
+    --node-completed: 142 76% 36%;
+    --edge-default: 210 18% 30%;
+    --edge-active: 25 95% 53%;
+    
+    /* Video player colors */
+    --player-bg: 210 25% 8%;
+    --player-controls: 210 20% 15%;
+    --progress-track: 210 18% 20%;
+    --progress-fill: 213 75% 55%;
+    --timeline-marker: 25 95% 53%;
+  }
+
+  .light {
+    --background: 0 0% 100%;
+    --foreground: 210 30% 8%;
+    --card: 0 0% 100%;
+    --card-foreground: 210 30% 8%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 30% 8%;
+    --primary: 213 75% 45%;
+    --primary-foreground: 210 20% 98%;
+    --secondary: 210 40% 95%;
+    --secondary-foreground: 210 30% 8%;
+    --muted: 210 40% 95%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 25 95% 53%;
+    --accent-foreground: 210 30% 8%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 213 75% 45%;
+    
+    /* Light mode educational colors */
+    --concept-primary: 213 75% 45%;
+    --concept-secondary: 25 95% 53%;
+    --concept-tertiary: 142 76% 36%;
+    --concept-accent: 271 81% 56%;
+    
+    /* Light mode graph colors */
+    --node-default: 210 40% 95%;
+    --node-active: 213 75% 45%;
+    --node-completed: 142 76% 36%;
+    --edge-default: 214.3 31.8% 75%;
+    --edge-active: 25 95% 53%;
+    
+    /* Light mode video player */
+    --player-bg: 0 0% 98%;
+    --player-controls: 210 40% 95%;
+    --progress-track: 214.3 31.8% 91.4%;
+    --progress-fill: 213 75% 45%;
+    --timeline-marker: 25 95% 53%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  @apply bg-muted;
+}
+
+::-webkit-scrollbar-thumb {
+  @apply bg-border rounded-full;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  @apply bg-accent;
+}
+
+/* Graph animations */
+@keyframes node-pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+}
+
+.node-active {
+  animation: node-pulse 2s ease-in-out infinite;
+}
+
+/* Video player custom styles */
+.video-container {
+  position: relative;
+  background: hsl(var(--player-bg));
+}
+
+.video-controls {
+  background: linear-gradient(
+    0deg,
+    hsl(var(--player-controls) / 0.9) 0%,
+    transparent 100%
+  );
+}
+
+.progress-bar {
+  background: hsl(var(--progress-track));
+}
+
+.progress-fill {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--progress-fill)) 0%,
+    hsl(var(--accent)) 100%
+  );
+}
+
+/* Timeline marker styles */
+.timeline-marker {
+  background: hsl(var(--timeline-marker));
+  box-shadow: 0 0 10px hsl(var(--timeline-marker) / 0.5);
+}
+
+.timeline-marker:hover {
+  background: hsl(var(--concept-secondary));
+  transform: scale(1.2);
+}
+
+/* Concept panel styles */
+.concept-card {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--muted)) 100%
+  );
+  border: 1px solid hsl(var(--border));
+}
+
+.concept-card:hover {
+  border-color: hsl(var(--accent));
+  box-shadow: 0 4px 12px hsl(var(--accent) / 0.1);
+}
+
+/* Upload area styles */
+.upload-area {
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--muted)) 100%
+  );
+  border: 2px dashed hsl(var(--border));
+  transition: all 0.3s ease;
+}
+
+.upload-area:hover,
+.upload-area.drag-over {
+  border-color: hsl(var(--accent));
+  background: linear-gradient(
+    135deg,
+    hsl(var(--card)) 0%,
+    hsl(var(--accent) / 0.05) 100%
+  );
+}
+
+/* Graph container styles */
+.graph-container {
+  background: radial-gradient(
+    circle at center,
+    hsl(var(--card)) 0%,
+    hsl(var(--background)) 70%
+  );
+}
