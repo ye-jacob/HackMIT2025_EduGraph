@@ -1,7 +1,12 @@
 import React from 'react';
-import { X, Clock, Tag, ExternalLink } from 'lucide-react';
+import { X, Clock, Tag, ExternalLink, BookOpen, Lightbulb, Wrench, BookMarked } from 'lucide-react';
 import { Button } from './ui/button';
 import { Badge } from './ui/badge';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Separator } from './ui/separator';
+import { ScrollArea } from './ui/scroll-area';
+import { Tabs, TabsContent, TabsList, TabsTrigger } from './ui/tabs';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { GraphNode } from './EduGraph';
 
 interface ConceptPanelProps {
@@ -33,120 +38,157 @@ export const ConceptPanel: React.FC<ConceptPanelProps> = ({
 
   const getCategoryIcon = (category: string) => {
     switch (category) {
-      case 'definition': return '📖';
-      case 'example': return '💡';
-      case 'application': return '🔧';
-      case 'prerequisite': return '📚';
-      default: return '🔍';
+      case 'definition': return <BookOpen className="w-3 h-3" />;
+      case 'example': return <Lightbulb className="w-3 h-3" />;
+      case 'application': return <Wrench className="w-3 h-3" />;
+      case 'prerequisite': return <BookMarked className="w-3 h-3" />;
+      default: return <Tag className="w-3 h-3" />;
     }
   };
 
   return (
-    <div className="concept-card rounded-lg p-4 space-y-4">
-      {/* Header */}
-      <div className="flex items-start justify-between">
-        <div className="flex-1">
-          <div className="flex items-center gap-3 mb-2">
-            <h3 className="text-lg font-semibold text-foreground">{concept.label}</h3>
-            <Badge className={getCategoryColor(concept.category)}>
-              {getCategoryIcon(concept.category)} {concept.category}
-            </Badge>
-          </div>
-          
-          {concept.isActive && (
-            <div className="inline-flex items-center gap-1 px-2 py-1 bg-primary/10 text-primary text-xs font-medium rounded-full border border-primary/20">
-              <div className="w-2 h-2 bg-primary rounded-full animate-pulse" />
-              Currently Active
-            </div>
-          )}
-        </div>
-        
-        <Button
-          variant="ghost"
-          size="sm"
-          onClick={onClose}
-          className="text-muted-foreground hover:text-foreground"
-        >
-          <X className="w-4 h-4" />
-        </Button>
-      </div>
-
-      {/* Description */}
-      <div className="space-y-2">
-        <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
-          <Tag className="w-4 h-4" />
-          Description
-        </h4>
-        <p className="text-sm text-muted-foreground leading-relaxed">
-          {concept.description}
-        </p>
-      </div>
-
-      {/* Timestamps */}
-      <div className="space-y-3">
-        <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
-          <Clock className="w-4 h-4" />
-          Referenced at ({concept.timestamps.length} times)
-        </h4>
-        
-        <div className="space-y-2 max-h-32 overflow-y-auto">
-          {concept.timestamps.map((timestamp, index) => (
-            <button
-              key={index}
-              onClick={() => onTimeJump(timestamp)}
-              className="flex items-center justify-between w-full p-2 text-sm bg-muted/50 hover:bg-muted rounded-lg transition-colors group"
-            >
-              <span className="font-mono text-primary">
-                {formatTime(timestamp)}
-              </span>
-              <div className="flex items-center gap-2 text-muted-foreground group-hover:text-foreground">
-                <span className="text-xs">Jump to</span>
-                <ExternalLink className="w-3 h-3" />
+    <TooltipProvider>
+      <Card className="w-full">
+        <CardHeader className="pb-3">
+          <div className="flex items-start justify-between">
+            <div className="flex-1">
+              <div className="flex items-center gap-3 mb-2">
+                <CardTitle className="text-lg">{concept.label}</CardTitle>
+                <Badge variant="secondary" className={getCategoryColor(concept.category)}>
+                  {getCategoryIcon(concept.category)}
+                  <span className="ml-1 capitalize">{concept.category}</span>
+                </Badge>
               </div>
-            </button>
-          ))}
-        </div>
-      </div>
+              
+              {concept.isActive && (
+                <Badge variant="default" className="inline-flex items-center gap-1">
+                  <div className="w-2 h-2 bg-primary-foreground rounded-full animate-pulse" />
+                  Currently Active
+                </Badge>
+              )}
+            </div>
+            
+            <Tooltip>
+              <TooltipTrigger asChild>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={onClose}
+                  className="h-8 w-8 p-0"
+                >
+                  <X className="w-4 h-4" />
+                </Button>
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>Close panel</p>
+              </TooltipContent>
+            </Tooltip>
+          </div>
+        </CardHeader>
 
-      {/* Quick Actions */}
-      <div className="flex gap-2 pt-2 border-t border-border">
-        <Button
-          size="sm"
-          onClick={() => onTimeJump(concept.timestamps[0])}
-          className="flex-1"
-        >
-          <ExternalLink className="w-4 h-4 mr-2" />
-          Go to First Reference
-        </Button>
-        
-        {concept.timestamps.length > 1 && (
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => onTimeJump(concept.timestamps[concept.timestamps.length - 1])}
-            className="flex-1"
-          >
-            Go to Last
-          </Button>
-        )}
-      </div>
+        <CardContent className="space-y-4">
+          <Tabs defaultValue="overview" className="w-full">
+            <TabsList className="grid w-full grid-cols-2">
+              <TabsTrigger value="overview">Overview</TabsTrigger>
+              <TabsTrigger value="timeline">Timeline</TabsTrigger>
+            </TabsList>
+            
+            <TabsContent value="overview" className="space-y-4">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2">
+                  <Tag className="w-4 h-4 text-muted-foreground" />
+                  <h4 className="text-sm font-medium">Description</h4>
+                </div>
+                <CardDescription className="text-sm leading-relaxed">
+                  {concept.description}
+                </CardDescription>
+              </div>
 
-      {/* Additional Info */}
-      <div className="text-xs text-muted-foreground space-y-1 pt-2 border-t border-border">
-        <div className="flex items-center justify-between">
-          <span>Node size:</span>
-          <span className="font-mono">{concept.size}px</span>
-        </div>
-        <div className="flex items-center justify-between">
-          <span>Total duration:</span>
-          <span className="font-mono">
-            {concept.timestamps.length > 1 
-              ? `${Math.round((concept.timestamps[concept.timestamps.length - 1] - concept.timestamps[0]) / 60)}min`
-              : '< 1min'
-            }
-          </span>
-        </div>
-      </div>
-    </div>
+              <Separator />
+
+              <div className="grid grid-cols-2 gap-4 text-sm">
+                <div className="space-y-1">
+                  <p className="text-muted-foreground">Node Size</p>
+                  <p className="font-mono font-medium">{concept.size}px</p>
+                </div>
+                <div className="space-y-1">
+                  <p className="text-muted-foreground">References</p>
+                  <p className="font-mono font-medium">{concept.timestamps.length}</p>
+                </div>
+                <div className="space-y-1 col-span-2">
+                  <p className="text-muted-foreground">Total Duration</p>
+                  <p className="font-mono font-medium">
+                    {concept.timestamps.length > 1 
+                      ? `${Math.round((concept.timestamps[concept.timestamps.length - 1] - concept.timestamps[0]) / 60)}min`
+                      : '< 1min'
+                    }
+                  </p>
+                </div>
+              </div>
+            </TabsContent>
+            
+            <TabsContent value="timeline" className="space-y-4">
+              <div className="flex items-center gap-2">
+                <Clock className="w-4 h-4 text-muted-foreground" />
+                <h4 className="text-sm font-medium">
+                  Video References ({concept.timestamps.length} times)
+                </h4>
+              </div>
+              
+              <ScrollArea className="h-48">
+                <div className="space-y-2 pr-4">
+                  {concept.timestamps.map((timestamp, index) => (
+                    <Tooltip key={index}>
+                      <TooltipTrigger asChild>
+                        <Button
+                          variant="ghost"
+                          onClick={() => onTimeJump(timestamp)}
+                          className="w-full justify-between h-auto p-3 hover:bg-muted/50"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="w-2 h-2 rounded-full bg-primary" />
+                            <span className="font-mono text-sm">
+                              {formatTime(timestamp)}
+                            </span>
+                          </div>
+                          <ExternalLink className="w-4 h-4 text-muted-foreground" />
+                        </Button>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Jump to {formatTime(timestamp)}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
+              </ScrollArea>
+            </TabsContent>
+          </Tabs>
+
+          <Separator />
+
+          <div className="flex gap-2">
+            <Button
+              size="sm"
+              onClick={() => onTimeJump(concept.timestamps[0])}
+              className="flex-1"
+            >
+              <ExternalLink className="w-4 h-4 mr-2" />
+              First Reference
+            </Button>
+            
+            {concept.timestamps.length > 1 && (
+              <Button
+                variant="outline"
+                size="sm"
+                onClick={() => onTimeJump(concept.timestamps[concept.timestamps.length - 1])}
+                className="flex-1"
+              >
+                Last Reference
+              </Button>
+            )}
+          </div>
+        </CardContent>
+      </Card>
+    </TooltipProvider>
   );
 };

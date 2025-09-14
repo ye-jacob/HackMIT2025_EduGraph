@@ -1,6 +1,10 @@
 import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
-import { Play, Pause, Volume2, VolumeX, Maximize, Settings } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, Maximize } from 'lucide-react';
 import { Button } from './ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { Badge } from './ui/badge';
+import { Slider } from './ui/slider';
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from './ui/tooltip';
 import { GraphNode } from './EduGraph';
 
 interface VideoPlayerProps {
@@ -26,7 +30,6 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const [isMuted, setIsMuted] = useState(false);
   const [playbackRate, setPlaybackRate] = useState(1);
   const [showControls, setShowControls] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
 
   useEffect(() => {
     if (videoRef.current) {
@@ -129,10 +132,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
       videoRef.current?.requestFullscreen();
-      setIsFullscreen(true);
     } else {
       document.exitFullscreen();
-      setIsFullscreen(false);
     }
   }, []);
 
@@ -164,147 +165,191 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
   }, [concepts, duration]);
 
   return (
-    <div className="video-container bg-card rounded-lg overflow-hidden shadow-lg">
-      <div className="relative group">
-        <video
-          ref={videoRef}
-          src={videoUrl}
-          className="w-full aspect-video bg-black"
-          preload="metadata"
-          playsInline
-          onMouseEnter={() => setShowControls(true)}
-          onMouseLeave={() => setShowControls(false)}
-          style={{
-            willChange: 'auto',
-            transform: 'translateZ(0)', // Force hardware acceleration
-          }}
-        />
-        
-        {/* Optimized Concept Overlays */}
-        {activeConcepts.length > 0 && (
-          <div className="absolute top-4 right-4 space-y-2 pointer-events-none">
-            {activeConcepts.map((concept) => (
-              <div
-                key={concept.id}
-                className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium animate-pulse-node"
-                style={{
-                  willChange: 'transform, opacity',
-                  transform: 'translateZ(0)', // Hardware acceleration
-                }}
-              >
-                {concept.label}
-              </div>
-            ))}
-          </div>
-        )}
-
-        {/* Video Controls */}
-        <div 
-          className={`absolute bottom-0 left-0 right-0 video-controls p-4 transition-opacity duration-300 ${
-            showControls ? 'opacity-100' : 'opacity-0'
-          }`}
-          onMouseEnter={() => setShowControls(true)}
-        >
-          {/* Progress Bar */}
-          <div className="mb-4">
-            <div 
-              className="progress-bar h-2 rounded-full cursor-pointer relative"
-              onClick={handleProgressClick}
-            >
-              <div 
-                className="progress-fill h-full rounded-full relative"
-                style={{ width: `${(currentTime / duration) * 100}%` }}
-              >
-                {/* Optimized Concept Markers */}
-                {conceptMarkers.map((marker) => (
-                  <div
-                    key={marker.key}
-                    className="timeline-marker absolute w-2 h-4 -top-1 rounded-sm transition-all duration-200"
-                    style={{ left: `${marker.position}%` }}
-                    title={marker.label}
-                  />
-                ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Control Buttons */}
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={togglePlay}
-                className="text-white hover:text-primary"
-              >
-                {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
-              </Button>
-
-              <div className="flex items-center gap-2">
-                <Button
-                  variant="ghost"
-                  size="sm"
-                  onClick={toggleMute}
-                  className="text-white hover:text-primary"
+    <TooltipProvider>
+      <Card className="overflow-hidden">
+        <div className="relative group">
+          <video
+            ref={videoRef}
+            src={videoUrl}
+            className="w-full aspect-video bg-black"
+            preload="metadata"
+            playsInline
+            onMouseEnter={() => setShowControls(true)}
+            onMouseLeave={() => setShowControls(false)}
+            style={{
+              willChange: 'auto',
+              transform: 'translateZ(0)', // Force hardware acceleration
+            }}
+          />
+          
+          {/* Optimized Concept Overlays */}
+          {activeConcepts.length > 0 && (
+            <div className="absolute top-4 right-4 space-y-2 pointer-events-none">
+              {activeConcepts.map((concept) => (
+                <Badge
+                  key={concept.id}
+                  variant="default"
+                  className="animate-pulse bg-primary/90 text-primary-foreground"
+                  style={{
+                    willChange: 'transform, opacity',
+                    transform: 'translateZ(0)', // Hardware acceleration
+                  }}
                 >
-                  {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
-                </Button>
-                
-                <input
-                  type="range"
-                  min="0"
-                  max="1"
-                  step="0.1"
-                  value={isMuted ? 0 : volume}
-                  onChange={(e) => handleVolumeChange(parseFloat(e.target.value))}
-                  className="w-16 h-1 bg-white/20 rounded-lg appearance-none cursor-pointer"
-                />
-              </div>
+                  {concept.label}
+                </Badge>
+              ))}
+            </div>
+          )}
 
-              <div className="text-white text-sm">
-                {formatTime(currentTime)} / {formatTime(duration)}
+          {/* Video Controls */}
+          <div 
+            className={`absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4 transition-opacity duration-300 ${
+              showControls ? 'opacity-100' : 'opacity-0'
+            }`}
+            onMouseEnter={() => setShowControls(true)}
+          >
+            {/* Progress Bar */}
+            <div className="mb-4">
+              <div 
+                className="h-2 bg-white/20 rounded-full cursor-pointer relative"
+                onClick={handleProgressClick}
+              >
+                <div 
+                  className="h-full bg-primary rounded-full relative"
+                  style={{ width: `${(currentTime / duration) * 100}%` }}
+                >
+                  {/* Optimized Concept Markers */}
+                  {conceptMarkers.map((marker) => (
+                    <Tooltip key={marker.key}>
+                      <TooltipTrigger asChild>
+                        <div
+                          className="absolute w-2 h-4 -top-1 rounded-sm transition-all duration-200 cursor-pointer hover:scale-110"
+                          style={{ left: `${marker.position}%` }}
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            onTimeUpdate(marker.timestamp);
+                          }}
+                        />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>{marker.label} - {formatTime(marker.timestamp)}</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  ))}
+                </div>
               </div>
             </div>
 
-            <div className="flex items-center gap-3">
-              <select
-                value={playbackRate}
-                onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))}
-                className="bg-white/20 text-white text-sm rounded px-2 py-1 border-none outline-none"
-              >
-                <option value={0.5}>0.5x</option>
-                <option value={0.75}>0.75x</option>
-                <option value={1}>1x</option>
-                <option value={1.25}>1.25x</option>
-                <option value={1.5}>1.5x</option>
-                <option value={2}>2x</option>
-              </select>
+            {/* Control Buttons */}
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={togglePlay}
+                      className="text-white hover:text-primary h-10 w-10 p-0"
+                    >
+                      {isPlaying ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>{isPlaying ? 'Pause' : 'Play'}</p>
+                  </TooltipContent>
+                </Tooltip>
 
-              <Button
-                variant="ghost"
-                size="sm"
-                onClick={toggleFullscreen}
-                className="text-white hover:text-primary"
-              >
-                <Maximize className="w-4 h-4" />
-              </Button>
+                <div className="flex items-center gap-2">
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        onClick={toggleMute}
+                        className="text-white hover:text-primary h-8 w-8 p-0"
+                      >
+                        {isMuted ? <VolumeX className="w-4 h-4" /> : <Volume2 className="w-4 h-4" />}
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>{isMuted ? 'Unmute' : 'Mute'}</p>
+                    </TooltipContent>
+                  </Tooltip>
+                  
+                  <Slider
+                    value={[isMuted ? 0 : volume]}
+                    onValueChange={(value) => handleVolumeChange(value[0])}
+                    max={1}
+                    step={0.1}
+                    className="w-16"
+                  />
+                </div>
+
+                <div className="text-white text-sm font-mono">
+                  {formatTime(currentTime)} / {formatTime(duration)}
+                </div>
+              </div>
+
+              <div className="flex items-center gap-3">
+                <select
+                  value={playbackRate}
+                  onChange={(e) => handlePlaybackRateChange(parseFloat(e.target.value))}
+                  className="bg-white/20 text-white text-sm rounded px-2 py-1 border-none outline-none"
+                >
+                  <option value={0.5}>0.5x</option>
+                  <option value={0.75}>0.75x</option>
+                  <option value={1}>1x</option>
+                  <option value={1.25}>1.25x</option>
+                  <option value={1.5}>1.5x</option>
+                  <option value={2}>2x</option>
+                </select>
+
+                <Tooltip>
+                  <TooltipTrigger asChild>
+                    <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={toggleFullscreen}
+                      className="text-white hover:text-primary h-8 w-8 p-0"
+                    >
+                      <Maximize className="w-4 h-4" />
+                    </Button>
+                  </TooltipTrigger>
+                  <TooltipContent>
+                    <p>Fullscreen</p>
+                  </TooltipContent>
+                </Tooltip>
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Video Title */}
-      <div className="p-4 border-t border-border">
-        <h3 className="text-lg font-semibold text-foreground">{title}</h3>
-        <div className="flex items-center justify-between mt-2 text-sm text-muted-foreground">
-          <span>Duration: {formatTime(duration)}</span>
-          <span>
-            {conceptsAtTime.length > 0 && 
-              `Current concepts: ${conceptsAtTime.map(c => c.label).join(', ')}`
-            }
-          </span>
-        </div>
-      </div>
-    </div>
+        <CardHeader className="pb-3">
+          <CardTitle className="text-lg">{title}</CardTitle>
+          <CardDescription>
+            Duration: {formatTime(duration)}
+          </CardDescription>
+        </CardHeader>
+
+        <CardContent className="pt-0">
+          <div className="flex items-center justify-between">
+            <div className="text-sm text-muted-foreground">
+              {conceptsAtTime.length > 0 && (
+                <div className="flex items-center gap-2">
+                  <span>Current concepts:</span>
+                  <div className="flex gap-1">
+                    {conceptsAtTime.map((concept) => (
+                      <Badge key={concept.id} variant="secondary" className="text-xs">
+                        {concept.label}
+                      </Badge>
+                    ))}
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+    </TooltipProvider>
   );
 };
