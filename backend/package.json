@@ -8,13 +8,14 @@
     "dev": "nodemon server.js"
   },
   "dependencies": {
+    "@google/generative-ai": "^0.24.1",
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.2",
     "express": "^4.18.2",
-    "multer": "^1.4.5-lts.1",
-    "fluent-ffmpeg": "^2.1.2",
     "ffmpeg-static": "^5.2.0",
     "ffprobe-static": "^3.1.0",
-    "@google/generative-ai": "^0.24.1",
-    "cors": "^2.8.5"
+    "fluent-ffmpeg": "^2.1.2",
+    "multer": "^1.4.5-lts.1"
   },
   "devDependencies": {
     "nodemon": "^3.0.1"

@@ -1,3 +1,4 @@
+require('dotenv').config();
 const express = require('express');
 const multer = require('multer');
 const ffmpeg = require('fluent-ffmpeg');
@@ -11,7 +12,7 @@ const cors = require('cors');
 ffmpeg.setFfmpegPath(ffmpegStatic);
 
 // Configuration
-const GEMINI_API_KEY = 'AIzaSyDwF3aqK1i_PLJCIm9exxk6-0gt6yqNp4Q';
+const GEMINI_API_KEY = process.env.GEMINI_API || 'AIzaSyDwF3aqK1i_PLJCIm9exxk6-0gt6yqNp4Q';
 const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);
 const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 

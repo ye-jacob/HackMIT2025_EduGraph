@@ -3,9 +3,13 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import fs from 'fs';
 import path from 'path';
+import dotenv from 'dotenv';
+
+// Load environment variables
+dotenv.config();
 
 // Configuration
-const GEMINI_API_KEY = 'AIzaSyDwF3aqK1i_PLJCIm9exxk6-0gt6yqNp4Q';
+const GEMINI_API_KEY = process.env.GEMINI_API || 'AIzaSyDwF3aqK1i_PLJCIm9exxk6-0gt6yqNp4Q';
 const TRANSCRIPT_FILE = 'transcript.txt';
 const OUTPUT_FILE = 'mit_18_06_lecture_01_structured_transcript.json';
 
