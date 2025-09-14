@@ -22,6 +22,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
   const [searchTerm, setSearchTerm] = useState('');
   const [zoomLevel, setZoomLevel] = useState(1);
   const simulationRef = useRef<d3.Simulation<GraphNode, GraphEdge> | null>(null);
+  const zoomRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
 
   const filteredNodes = React.useMemo(() => {
     if (!searchTerm) return nodes;
@@ -53,6 +54,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
       });
 
     svg.call(zoom);
+    zoomRef.current = zoom;
 
     const container = svg.append('g');
 
@@ -130,10 +132,11 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
       })
       .attr('stroke', d => selectedNode?.id === d.id ? 'hsl(var(--accent))' : 'hsl(var(--border))')
       .attr('stroke-width', d => selectedNode?.id === d.id ? 3 : 1)
-      .attr('opacity', d => d.isActive ? 1 : 0.8);
+      .attr('opacity', d => d.isActive ? 1 : 0.8)
+      .classed('selected-node', d => selectedNode?.id === d.id);
 
     // Add labels
-    const labels = nodeGroups
+    nodeGroups
       .append('text')
       .attr('class', 'node-label')
       .attr('text-anchor', 'middle')
@@ -147,6 +150,9 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
     nodeGroups.on('click', (event, d) => {
       event.stopPropagation();
       onNodeClick(d);
+      
+      // Auto-zoom and center on the clicked node
+      focusOnNode(d, svg, zoom, width, height);
     });
 
     // Add hover effects
@@ -185,7 +191,7 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
           .style('left', (event.pageX + 10) + 'px')
           .style('top', (event.pageY - 10) + 'px');
       })
-      .on('mouseleave', function(event, d) {
+      .on('mouseleave', function(_, d) {
         d3.select(this).select('circle')
           .transition()
           .duration(200)
@@ -198,10 +204,10 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
     // Animation loop
     simulation.on('tick', () => {
       link
-        .attr('x1', d => (d.source as GraphNode).x!)
-        .attr('y1', d => (d.source as GraphNode).y!)
-        .attr('x2', d => (d.target as GraphNode).x!)
-        .attr('y2', d => (d.target as GraphNode).y!);
+        .attr('x1', d => (d.source as any).x!)
+        .attr('y1', d => (d.source as any).y!)
+        .attr('x2', d => (d.target as any).x!)
+        .attr('y2', d => (d.target as any).y!);
 
       nodeGroups
         .attr('transform', d => `translate(${d.x},${d.y})`);
@@ -220,13 +226,13 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
 
       link
         .attr('stroke', d => {
-          const sourceActive = (d.source as GraphNode).isActive;
-          const targetActive = (d.target as GraphNode).isActive;
+          const sourceActive = (d.source as any).isActive;
+          const targetActive = (d.target as any).isActive;
           return sourceActive || targetActive ? 'hsl(var(--edge-active))' : 'hsl(var(--edge-default))';
         })
         .attr('stroke-opacity', d => {
-          const sourceActive = (d.source as GraphNode).isActive;
-          const targetActive = (d.target as GraphNode).isActive;
+          const sourceActive = (d.source as any).isActive;
+          const targetActive = (d.target as any).isActive;
           return sourceActive || targetActive ? 0.8 : 0.6;
         });
     };
@@ -243,6 +249,35 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
       case 'prerequisite': return 'hsl(var(--concept-accent))';
       default: return 'hsl(var(--node-default))';
     }
+  };
+
+  const focusOnNode = (node: GraphNode, svg: d3.Selection<SVGSVGElement, unknown, null, undefined>, zoom: d3.ZoomBehavior<SVGSVGElement, unknown>, width: number, height: number) => {
+    if (!node.x || !node.y) return;
+    
+    // Calculate the scale needed to make the node description fit on screen
+    // We want to zoom in enough so the description panel (which appears below the graph) is visible
+    // Adjust the scale based on the current zoom level to avoid over-zooming
+    const currentScale = zoomLevel;
+    const targetScale = Math.min(2.0, Math.max(1.2, currentScale * 1.3));
+    
+    // Calculate the center point for the node
+    const centerX = node.x;
+    const centerY = node.y;
+    
+    // Adjust the center position to account for the concept panel that appears below
+    // We want to position the node slightly higher so the panel is visible
+    const adjustedCenterY = centerY - (height * 0.1); // Move up by 10% of height
+    
+    // Create a smooth transition to the new view
+    svg.transition()
+      .duration(750)
+      .ease(d3.easeCubicInOut)
+      .call(
+        zoom.transform as any,
+        d3.zoomIdentity
+          .translate(width / 2 - centerX * targetScale, height / 2 - adjustedCenterY * targetScale)
+          .scale(targetScale)
+      );
   };
 
   const handleZoomIn = useCallback(() => {
@@ -279,6 +314,20 @@ export const KnowledgeGraph: React.FC<KnowledgeGraphProps> = ({
   useEffect(() => {
     initializeGraph();
   }, [initializeGraph]);
+
+  // Auto-focus on selected node when it changes
+  useEffect(() => {
+    if (selectedNode && svgRef.current && zoomRef.current) {
+      const svg = d3.select(svgRef.current);
+      const width = 600;
+      const height = 400;
+      
+      // Wait a bit for the simulation to settle
+      setTimeout(() => {
+        focusOnNode(selectedNode, svg, zoomRef.current!, width, height);
+      }, 100);
+    }
+  }, [selectedNode]);
 
   return (
     <div className="graph-container bg-card rounded-lg border border-border shadow-lg overflow-hidden flex flex-col h-full">

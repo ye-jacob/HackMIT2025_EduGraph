@@ -10,14 +10,21 @@ import { Separator } from './ui/separator';
 interface VideoUploadProps {
   onUpload: (file: File) => void;
   isProcessing: boolean;
+  processingProgress?: {
+    stage: 'converting' | 'transcribing' | 'structuring' | 'complete';
+    progress: number;
+    message: string;
+  } | null;
 }
 
-export const VideoUpload: React.FC<VideoUploadProps> = ({ onUpload, isProcessing }) => {
+export const VideoUpload: React.FC<VideoUploadProps> = ({ onUpload, isProcessing, processingProgress }) => {
   const [dragOver, setDragOver] = useState(false);
   const [progress, setProgress] = useState(0);
 
   React.useEffect(() => {
-    if (isProcessing) {
+    if (isProcessing && processingProgress) {
+      setProgress(processingProgress.progress);
+    } else if (isProcessing) {
       const interval = setInterval(() => {
         setProgress(prev => {
           if (prev >= 95) {
@@ -32,7 +39,7 @@ export const VideoUpload: React.FC<VideoUploadProps> = ({ onUpload, isProcessing
     } else {
       setProgress(0);
     }
-  }, [isProcessing]);
+  }, [isProcessing, processingProgress]);
 
   const handleDragOver = useCallback((e: React.DragEvent) => {
     e.preventDefault();
@@ -81,9 +88,20 @@ export const VideoUpload: React.FC<VideoUploadProps> = ({ onUpload, isProcessing
             <div className="space-y-3">
               <Progress value={progress} className="w-full" />
               <div className="text-sm text-muted-foreground text-center">
-                {progress < 30 && "Extracting audio and transcribing..."}
-                {progress >= 30 && progress < 70 && "Analyzing concepts and relationships..."}
-                {progress >= 70 && "Building your interactive graph..."}
+                {processingProgress ? (
+                  <div>
+                    <div className="font-medium">{processingProgress.message}</div>
+                    <div className="text-xs mt-1">
+                      Stage: {processingProgress.stage} ({Math.round(processingProgress.progress)}%)
+                    </div>
+                  </div>
+                ) : (
+                  <>
+                    {progress < 30 && "Extracting audio and transcribing..."}
+                    {progress >= 30 && progress < 70 && "Analyzing concepts and relationships..."}
+                    {progress >= 70 && "Building your interactive graph..."}
+                  </>
+                )}
               </div>
             </div>
             
