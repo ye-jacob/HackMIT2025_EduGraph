@@ -35,7 +35,12 @@ interface VideosResponse {
   processedVideos: ProcessedVideo[];
 }
 
-export const Home: React.FC = () => {
+interface HomeProps {
+  onVideoClick: (video: ProcessedVideo) => void;
+  onNavigateToVideo: () => void;
+}
+
+export const Home: React.FC<HomeProps> = ({ onVideoClick, onNavigateToVideo }) => {
   const [videos, setVideos] = useState<VideoData[]>([]);
   const [processedVideos, setProcessedVideos] = useState<ProcessedVideo[]>([]);
   const [combinedNodes, setCombinedNodes] = useState<GraphNode[]>([]);
@@ -214,7 +219,14 @@ export const Home: React.FC = () => {
             <h2 className="text-2xl font-semibold text-foreground mb-4">Your Videos</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {processedVideos.map((video, index) => (
-                <Card key={video.id} className="hover:shadow-lg transition-shadow">
+                <Card 
+                  key={video.id} 
+                  className="hover:shadow-lg transition-shadow cursor-pointer hover:border-primary/50"
+                  onClick={() => {
+                    onVideoClick(video);
+                    onNavigateToVideo();
+                  }}
+                >
                   <CardHeader>
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg truncate">{video.title}</CardTitle>
@@ -241,6 +253,11 @@ export const Home: React.FC = () => {
                         <span className="text-xs text-muted-foreground">
                           Color-coded in combined graph
                         </span>
+                      </div>
+                      <div className="mt-4 pt-3 border-t border-border">
+                        <p className="text-xs text-muted-foreground text-center">
+                          Click to view video and knowledge graph
+                        </p>
                       </div>
                     </div>
                   </CardContent>

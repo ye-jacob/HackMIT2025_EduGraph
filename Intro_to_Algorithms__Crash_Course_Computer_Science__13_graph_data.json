@@ -1,7 +1,7 @@
 {
   "metadata": {
     "source_video": "Intro to Algorithms_ Crash Course Computer Science #13.mp4",
-    "generated_on": "2025-09-14T14:56:30.229Z",
+    "generated_on": "2025-09-14T15:00:03.591Z",
     "type": "knowledge_graph",
     "node_count": 13,
     "edge_count": 12
@@ -10,41 +10,33 @@
     {
       "id": "node_0",
       "label": "Introduction to Algorithms",
-      "x": 231.60124595223382,
-      "y": 173.2206789219506,
+      "x": 124.49897251808784,
+      "y": 246.94983646858867,
       "size": 20,
       "color": "hsl(0, 70%, 60%)",
       "timestamps": [
         0,
         30,
         60,
-        76,
-        120,
+        85,
         150,
-        180,
         210,
         240,
-        270,
         300,
         330,
         360,
-        390,
-        420,
-        450,
-        480,
-        510,
-        540,
-        570
+        375,
+        420
       ],
-      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
-      "category": "prerequisite",
+      "description": "Introduces the concept of algorithms as a sequence of steps to solve a computational problem.  Uses the example of calculating exponents in Python or Java, highlighting that multiple algorithms can achieve the same result.  Emphasizes that some algorithms are more efficient than others in terms of steps and memory usage.",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_1",
       "label": "What is an Algorithm?",
-      "x": 184.34721822379424,
-      "y": 221.41900380757534,
+      "x": 159.23601819760273,
+      "y": 112.75824267923203,
       "size": 17,
       "color": "hsl(60, 70%, 60%)",
       "timestamps": [
@@ -52,187 +44,171 @@
         30,
         60
       ],
-      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
-      "category": "prerequisite",
+      "description": "Introduces the concept of algorithms as a sequence of steps to solve a computational problem.  Uses the example of calculating exponents in Python or Java, highlighting that multiple algorithms can achieve the same result.  Emphasizes that some algorithms are more efficient than others in terms of steps and memory usage.",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_2",
-      "label": "Definition and Importance",
-      "x": 218.7253999733044,
-      "y": 237.05831811421191,
+      "label": "Definition and Examples",
+      "x": 296.28030407814424,
+      "y": 152.64169065112384,
       "size": 14,
       "color": "hsl(120, 70%, 60%)",
       "timestamps": [
         0
       ],
-      "description": "Introduces the concept of algorithms and their importance in computer science. Mentions previous episodes covering programming in Python/Java.  Emphasizes that multiple algorithms can solve the same problem.",
-      "category": "prerequisite",
+      "description": "Introduces the concept of algorithms as a sequence of steps to solve a computational problem.  Uses the example of calculating exponents in Python or Java, highlighting that multiple algorithms can achieve the same result.  Emphasizes that some algorithms are more efficient than others in terms of steps and memory usage.",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_3",
-      "label": "Example: Calculating Exponents",
-      "x": 371.06302128361284,
-      "y": 103.48987068797892,
+      "label": "Algorithm Efficiency and Factors",
+      "x": 256.43764537218993,
+      "y": 348.8568405643068,
       "size": 14,
       "color": "hsl(150, 70%, 60%)",
       "timestamps": [
         30
       ],
-      "description": "Provides an example of calculating exponents using functions and highlights that different algorithms can achieve the same result with varying efficiency. Introduces the concept of algorithmic efficiency based on steps and memory usage.",
-      "category": "example",
+      "description": "Discusses algorithm efficiency, focusing on the number of steps as a key factor, but acknowledging that memory usage can also be a concern.  The concept of 'better' algorithms is introduced in terms of fewer steps generally being preferred.",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_4",
-      "label": "Algorithmic Efficiency",
-      "x": 444.31125891500096,
-      "y": 366.9019784838702,
+      "label": "Historical Context: Al-Khwarizmi",
+      "x": 304.12961000248833,
+      "y": 388.76474954961805,
       "size": 14,
       "color": "hsl(180, 70%, 60%)",
       "timestamps": [
         60
       ],
-      "description": "Explains the origin of the term \\\"algorithm\\\" from the Persian mathematician Muhammad ibn Musa al-Khwarizmi and its connection to algebra and computer science.",
+      "description": "Provides historical context by mentioning the origin of the term 'algorithm' from Muhammad ibn Musa al-Khwarizmi, linking it to the historical development of algebra and the evolution of computer science.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_5",
       "label": "Sorting Algorithms",
-      "x": 257.08491114383446,
-      "y": 240.1708462511363,
+      "x": 480.97236289158457,
+      "y": 164.4401860340795,
       "size": 17,
       "color": "hsl(90, 70%, 60%)",
       "timestamps": [
-        76,
-        120,
+        85,
         150,
-        180,
         210,
         240,
-        270,
-        300,
-        330,
-        360
+        300
       ],
-      "description": "Transitions to the topic of sorting algorithms, highlighting its prevalence in computer science applications (airfare, email sorting, contact lists).  Introduces the idea that many sorting algorithms exist.",
+      "description": "Introduces the sorting problem and the concept of arrays as a way to represent data. Uses the example of sorting airfare prices to Indianapolis. Explains the selection sort algorithm step-by-step, highlighting the process of finding the smallest element and swapping it to the correct position.  Emphasizes the iterative nature of the algorithm.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_6",
-      "label": "Selection Sort",
-      "x": 211.8500390101201,
-      "y": 236.09822748675202,
+      "label": "Selection Sort: Method and Analysis",
+      "x": 493.74600626803596,
+      "y": 137.62688372752365,
       "size": 14,
       "color": "hsl(120, 70%, 60%)",
       "timestamps": [
-        76,
-        120,
-        150
+        85
       ],
-      "description": "Transitions to the topic of sorting algorithms, highlighting its prevalence in computer science applications (airfare, email sorting, contact lists).  Introduces the idea that many sorting algorithms exist.",
+      "description": "Introduces the sorting problem and the concept of arrays as a way to represent data. Uses the example of sorting airfare prices to Indianapolis. Explains the selection sort algorithm step-by-step, highlighting the process of finding the smallest element and swapping it to the correct position.  Emphasizes the iterative nature of the algorithm.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_7",
-      "label": "Merge Sort",
-      "x": 183.23578964036045,
-      "y": 280.28824973096573,
+      "label": "Merge Sort: Method and Analysis",
+      "x": 216.8492110766734,
+      "y": 385.7788418963225,
       "size": 14,
       "color": "hsl(150, 70%, 60%)",
       "timestamps": [
-        270,
-        300,
-        330,
-        360
+        150,
+        240
       ],
-      "description": "Transitions to a more efficient sorting algorithm: merge sort.  Highlights the inefficiency of O(n^2) for large datasets.",
+      "description": "Provides pseudocode for selection sort, emphasizing its reusability.  Analyzes the algorithm's complexity by examining the nested loops. Explains that the algorithm has O(n²) complexity, meaning the running time grows proportionally to the square of the input size.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_8",
-      "label": "Big O Notation and Complexity Analysis",
-      "x": 465.4514442183806,
-      "y": 118.95582826244856,
+      "label": "Big O Notation and Complexity Comparison",
+      "x": 377.5317207992563,
+      "y": 176.21182249295123,
       "size": 14,
       "color": "hsl(180, 70%, 60%)",
       "timestamps": [
-        180,
         210,
-        240
+        300
       ],
-      "description": "Presents pseudocode for the selection sort algorithm. Emphasizes the reusability of the function for different array sizes.",
-      "category": "application",
+      "description": "Introduces Big O notation as a way to characterize the complexity of algorithms. Illustrates how the O(n²) complexity of selection sort leads to significant increases in running time as the input size grows (e.g., from 8 to 80 items).",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_9",
       "label": "Graph Search Algorithms",
-      "x": 366.5095484582424,
-      "y": 197.2125497108907,
+      "x": 352.43145545851155,
+      "y": 399.8626037599442,
       "size": 17,
       "color": "hsl(120, 70%, 60%)",
       "timestamps": [
-        390,
-        420,
-        450,
-        480,
-        510,
-        540,
-        570
+        330,
+        360,
+        375,
+        420
       ],
-      "description": "Transitions to the topic of graph search algorithms. Introduces the concept of a graph as a network of nodes and edges, using a map with cities and roads as an example.",
+      "description": "Transitions to the topic of graph search algorithms. Defines a graph as a network of nodes and edges, using the analogy of a map with cities and roads. Explains the concept of edge weights representing costs or distances.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_10",
-      "label": "Introduction to Graphs",
-      "x": 235.23085991095635,
-      "y": 172.12804173436953,
+      "label": "Introduction to Graphs and Graph Problems",
+      "x": 400.20711986463385,
+      "y": 327.5351521437709,
       "size": 14,
       "color": "hsl(120, 70%, 60%)",
       "timestamps": [
-        390,
-        420
+        330
       ],
-      "description": "Transitions to the topic of graph search algorithms. Introduces the concept of a graph as a network of nodes and edges, using a map with cities and roads as an example.",
+      "description": "Transitions to the topic of graph search algorithms. Defines a graph as a network of nodes and edges, using the analogy of a map with cities and roads. Explains the concept of edge weights representing costs or distances.",
       "category": "definition",
       "isActive": false
     },
     {
       "id": "node_11",
-      "label": "Dijkstra's Algorithm",
-      "x": 380.9823440072849,
-      "y": 117.25309503381513,
+      "label": "Brute Force Approach",
+      "x": 396.96668312473247,
+      "y": 176.84987453262283,
       "size": 14,
       "color": "hsl(150, 70%, 60%)",
       "timestamps": [
-        450,
-        480,
-        510
+        360
       ],
-      "description": "Discusses a brute-force approach to graph search and its high complexity (O(n!)).  Contrasts it with more efficient algorithms.",
-      "category": "application",
+      "description": "Describes a brute force approach to finding the fastest route in a graph, which involves checking every possible path.  Points out that this approach has factorial complexity (O(n!)), which is highly inefficient.",
+      "category": "definition",
       "isActive": false
     },
     {
       "id": "node_12",
-      "label": "Complexity Analysis and Improvements",
-      "x": 335.5525574970054,
-      "y": 384.38211979759046,
+      "label": "Dijkstra's Algorithm: Method and Analysis",
+      "x": 360.9428093970348,
+      "y": 313.05724354804386,
       "size": 14,
       "color": "hsl(180, 70%, 60%)",
       "timestamps": [
-        540,
-        570
+        375,
+        420
       ],
-      "description": "Analyzes the original complexity of Dijkstra's algorithm (O(n^2)) and its improved version (O(n log n + m), where m is the number of edges). Shows the improvement in the example graph.",
+      "description": "Introduces Dijkstra's algorithm as a more efficient solution to the shortest path problem. Steps through an example using a graph representing locations in Game of Thrones, showing how the algorithm iteratively finds the shortest paths from Highgarden to Winterfell, highlighting the process of updating path costs and selecting the node with the lowest cost.",
       "category": "definition",
       "isActive": false
     }
