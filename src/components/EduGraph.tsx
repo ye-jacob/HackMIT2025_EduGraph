@@ -236,6 +236,10 @@ export const EduGraph: React.FC = () => {
     setCurrentTime(time);
     
     if (videoData) {
+      // Only update if there's a significant time change to reduce re-renders
+      const timeDiff = Math.abs(time - currentTime);
+      if (timeDiff < 0.5) return; // Skip updates for small time changes
+      
       // Update active nodes based on current time
       const updatedNodes = videoData.nodes.map(node => ({
         ...node,
@@ -244,9 +248,16 @@ export const EduGraph: React.FC = () => {
         )
       }));
       
-      setVideoData(prev => prev ? { ...prev, nodes: updatedNodes } : null);
+      // Only update if there are actual changes to active states
+      const hasChanges = updatedNodes.some((node, index) => 
+        node.isActive !== videoData.nodes[index].isActive
+      );
+      
+      if (hasChanges) {
+        setVideoData(prev => prev ? { ...prev, nodes: updatedNodes } : null);
+      }
     }
-  }, [videoData]);
+  }, [videoData, currentTime]);
 
   const handleNodeClick = useCallback((node: GraphNode) => {
     setSelectedNode(node);

@@ -156,6 +156,19 @@
 .video-container {
   position: relative;
   background: hsl(var(--player-bg));
+  /* Optimize for smooth video rendering */
+  contain: layout style paint;
+  will-change: auto;
+}
+
+.video-container video {
+  /* Hardware acceleration and smooth rendering */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+  /* Prevent video jitter */
+  image-rendering: optimizeSpeed;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .video-controls {

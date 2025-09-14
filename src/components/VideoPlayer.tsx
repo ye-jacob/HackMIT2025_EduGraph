@@ -38,20 +38,34 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const video = videoRef.current;
     if (!video) return;
 
+    let lastUpdateTime = 0;
+    const UPDATE_INTERVAL = 100; // Update every 100ms instead of every frame
+
     const handleTimeUpdate = () => {
-      onTimeUpdate(video.currentTime);
+      const now = Date.now();
+      if (now - lastUpdateTime >= UPDATE_INTERVAL) {
+        onTimeUpdate(video.currentTime);
+        lastUpdateTime = now;
+      }
     };
 
     const handleLoadedMetadata = () => {
       setIsPlaying(false);
     };
 
+    const handlePlay = () => setIsPlaying(true);
+    const handlePause = () => setIsPlaying(false);
+
     video.addEventListener('timeupdate', handleTimeUpdate);
     video.addEventListener('loadedmetadata', handleLoadedMetadata);
+    video.addEventListener('play', handlePlay);
+    video.addEventListener('pause', handlePause);
 
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
       video.removeEventListener('loadedmetadata', handleLoadedMetadata);
+      video.removeEventListener('play', handlePlay);
+      video.removeEventListener('pause', handlePause);
     };
   }, [onTimeUpdate]);
 
@@ -137,16 +151,26 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           ref={videoRef}
           src={videoUrl}
           className="w-full aspect-video bg-black"
+          preload="metadata"
+          playsInline
           onMouseEnter={() => setShowControls(true)}
           onMouseLeave={() => setShowControls(false)}
+          style={{
+            willChange: 'auto',
+            transform: 'translateZ(0)', // Force hardware acceleration
+          }}
         />
         
         {/* Concept Overlays */}
-        <div className="absolute top-4 right-4 space-y-2">
+        <div className="absolute top-4 right-4 space-y-2 pointer-events-none">
           {getActiveConcepts().map((concept) => (
             <div
               key={concept.id}
               className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium animate-pulse-node"
+              style={{
+                willChange: 'transform, opacity',
+                transform: 'translateZ(0)', // Hardware acceleration
+              }}
             >
               {concept.label}
             </div>
