@@ -59,26 +59,40 @@ export const EduGraph: React.FC = () => {
   const handleVideoUpload = useCallback(async (file: File) => {
     setIsProcessing(true);
     
+    // Get actual video duration
+    const getVideoDuration = (file: File): Promise<number> => {
+      return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.preload = 'metadata';
+        video.onloadedmetadata = () => {
+          resolve(video.duration);
+        };
+        video.src = URL.createObjectURL(file);
+      });
+    };
+
+    const actualDuration = await getVideoDuration(file);
+    
     // Simulate video processing
     await new Promise(resolve => setTimeout(resolve, 3000));
     
-    // Mock processed video data
+    // Mock processed video data with actual duration
     const mockVideoData: VideoData = {
       url: URL.createObjectURL(file),
       title: file.name.replace(/\.[^/.]+$/, ""),
-      duration: 600, // 10 minutes mock duration
+      duration: actualDuration,
       transcript: [
-        { start: 0, end: 30, text: "Welcome to today's lecture on machine learning fundamentals." },
-        { start: 30, end: 90, text: "First, let's define what artificial intelligence means in the context of computer science." },
-        { start: 90, end: 150, text: "Neural networks are the foundation of modern deep learning algorithms." },
-        { start: 150, end: 210, text: "Training data is crucial for developing accurate machine learning models." },
-        { start: 210, end: 270, text: "Supervised learning uses labeled examples to train predictive models." },
-        { start: 270, end: 330, text: "Unsupervised learning finds patterns in data without explicit labels." },
-        { start: 330, end: 390, text: "Deep learning architectures can process complex, high-dimensional data." },
-        { start: 390, end: 450, text: "Backpropagation is the algorithm used to train neural networks effectively." },
-        { start: 450, end: 510, text: "Overfitting occurs when models memorize training data instead of generalizing." },
-        { start: 510, end: 600, text: "Cross-validation helps evaluate model performance on unseen data." }
-      ],
+        { start: 0, end: Math.min(30, actualDuration), text: "Welcome to today's lecture on machine learning fundamentals." },
+        { start: Math.min(30, actualDuration), end: Math.min(90, actualDuration), text: "First, let's define what artificial intelligence means in the context of computer science." },
+        { start: Math.min(90, actualDuration), end: Math.min(150, actualDuration), text: "Neural networks are the foundation of modern deep learning algorithms." },
+        { start: Math.min(150, actualDuration), end: Math.min(210, actualDuration), text: "Training data is crucial for developing accurate machine learning models." },
+        { start: Math.min(210, actualDuration), end: Math.min(270, actualDuration), text: "Supervised learning uses labeled examples to train predictive models." },
+        { start: Math.min(270, actualDuration), end: Math.min(330, actualDuration), text: "Unsupervised learning finds patterns in data without explicit labels." },
+        { start: Math.min(330, actualDuration), end: Math.min(390, actualDuration), text: "Deep learning architectures can process complex, high-dimensional data." },
+        { start: Math.min(390, actualDuration), end: Math.min(450, actualDuration), text: "Backpropagation is the algorithm used to train neural networks effectively." },
+        { start: Math.min(450, actualDuration), end: Math.min(510, actualDuration), text: "Overfitting occurs when models memorize training data instead of generalizing." },
+        { start: Math.min(510, actualDuration), end: Math.min(actualDuration, actualDuration), text: "Cross-validation helps evaluate model performance on unseen data." }
+      ].filter(item => item.start < actualDuration),
       nodes: [
         {
           id: 'ai',
@@ -87,7 +101,7 @@ export const EduGraph: React.FC = () => {
           y: 200,
           size: 20,
           color: 'hsl(var(--concept-primary))',
-          timestamps: [30, 90],
+          timestamps: [Math.min(30, actualDuration), Math.min(90, actualDuration)].filter(t => t < actualDuration),
           description: 'The simulation of human intelligence in machines',
           category: 'definition',
           isActive: false
@@ -99,7 +113,7 @@ export const EduGraph: React.FC = () => {
           y: 300,
           size: 18,
           color: 'hsl(var(--concept-secondary))',
-          timestamps: [0, 150],
+          timestamps: [0, Math.min(150, actualDuration)].filter(t => t < actualDuration),
           description: 'A subset of AI that enables computers to learn without explicit programming',
           category: 'definition',
           isActive: false
@@ -111,7 +125,7 @@ export const EduGraph: React.FC = () => {
           y: 250,
           size: 16,
           color: 'hsl(var(--concept-tertiary))',
-          timestamps: [90, 330, 390],
+          timestamps: [Math.min(90, actualDuration), Math.min(330, actualDuration), Math.min(390, actualDuration)].filter(t => t < actualDuration),
           description: 'Computing systems inspired by biological neural networks',
           category: 'application',
           isActive: false
@@ -123,7 +137,7 @@ export const EduGraph: React.FC = () => {
           y: 400,
           size: 14,
           color: 'hsl(var(--concept-accent))',
-          timestamps: [150, 210],
+          timestamps: [Math.min(150, actualDuration), Math.min(210, actualDuration)].filter(t => t < actualDuration),
           description: 'Dataset used to teach machine learning algorithms',
           category: 'prerequisite',
           isActive: false
@@ -135,7 +149,7 @@ export const EduGraph: React.FC = () => {
           y: 200,
           size: 15,
           color: 'hsl(var(--concept-primary))',
-          timestamps: [210, 270],
+          timestamps: [Math.min(210, actualDuration), Math.min(270, actualDuration)].filter(t => t < actualDuration),
           description: 'Learning with labeled training examples',
           category: 'example',
           isActive: false
@@ -147,7 +161,7 @@ export const EduGraph: React.FC = () => {
           y: 400,
           size: 15,
           color: 'hsl(var(--concept-secondary))',
-          timestamps: [270, 330],
+          timestamps: [Math.min(270, actualDuration), Math.min(330, actualDuration)].filter(t => t < actualDuration),
           description: 'Finding hidden patterns in unlabeled data',
           category: 'example',
           isActive: false
@@ -159,7 +173,7 @@ export const EduGraph: React.FC = () => {
           y: 150,
           size: 17,
           color: 'hsl(var(--concept-tertiary))',
-          timestamps: [330, 390],
+          timestamps: [Math.min(330, actualDuration), Math.min(390, actualDuration)].filter(t => t < actualDuration),
           description: 'Machine learning using deep neural networks',
           category: 'application',
           isActive: false
@@ -171,7 +185,7 @@ export const EduGraph: React.FC = () => {
           y: 350,
           size: 13,
           color: 'hsl(var(--concept-accent))',
-          timestamps: [390, 450],
+          timestamps: [Math.min(390, actualDuration), Math.min(450, actualDuration)].filter(t => t < actualDuration),
           description: 'Algorithm for training neural networks',
           category: 'application',
           isActive: false
@@ -183,7 +197,7 @@ export const EduGraph: React.FC = () => {
           y: 450,
           size: 12,
           color: 'hsl(var(--concept-primary))',
-          timestamps: [450, 510],
+          timestamps: [Math.min(450, actualDuration), Math.min(510, actualDuration)].filter(t => t < actualDuration),
           description: 'When a model performs well on training data but poorly on new data',
           category: 'definition',
           isActive: false
@@ -195,7 +209,7 @@ export const EduGraph: React.FC = () => {
           y: 100,
           size: 14,
           color: 'hsl(var(--concept-secondary))',
-          timestamps: [510, 600],
+          timestamps: [Math.min(510, actualDuration), Math.min(actualDuration, actualDuration)].filter(t => t < actualDuration),
           description: 'Technique for assessing model generalization',
           category: 'application',
           isActive: false
