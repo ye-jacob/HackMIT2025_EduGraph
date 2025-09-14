@@ -311,10 +311,13 @@ export const EduGraph: React.FC = () => {
             </div>
           </SidebarInset>
           
-          <Sidebar side="right" className="border-l bg-background data-[state=open]:w-1/2 data-[state=closed]:w-0 transition-all duration-300">
-            <SidebarHeader className="flex flex-row items-center gap-2 p-4 border-b bg-background">
-              <Network className="h-5 w-5" />
-              <h2 className="font-semibold">Knowledge Graph</h2>
+          <Sidebar side="right" className="border-l bg-background data-[state=open]:w-2/3 data-[state=closed]:w-0 transition-all duration-300">
+            <SidebarHeader className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background">
+              <div className="flex items-center gap-2">
+                <Network className="h-5 w-5" />
+                <h2 className="font-semibold">Knowledge Graph</h2>
+              </div>
+              <SidebarTrigger />
             </SidebarHeader>
             <SidebarContent className="p-4 bg-background">
               <KnowledgeGraph
