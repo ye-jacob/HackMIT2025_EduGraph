@@ -30,7 +30,11 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
 
   useEffect(() => {
     if (videoRef.current) {
-      videoRef.current.currentTime = currentTime;
+      // Only update video time if the difference is significant to avoid feedback loops
+      const timeDiff = Math.abs(videoRef.current.currentTime - currentTime);
+      if (timeDiff > 0.5) {
+        videoRef.current.currentTime = currentTime;
+      }
     }
   }, [currentTime]);
 
@@ -44,8 +48,12 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const handleTimeUpdate = () => {
       const now = Date.now();
       if (now - lastUpdateTime >= UPDATE_INTERVAL) {
-        onTimeUpdate(video.currentTime);
-        lastUpdateTime = now;
+        // Only update if the time has actually changed significantly
+        const currentVideoTime = video.currentTime;
+        if (Math.abs(currentVideoTime - currentTime) > 0.1) {
+          onTimeUpdate(currentVideoTime);
+          lastUpdateTime = now;
+        }
       }
     };
 
@@ -115,8 +123,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     const newTime = (clickX / rect.width) * duration;
     
     videoRef.current.currentTime = newTime;
-    onTimeUpdate(newTime);
-  }, [duration, onTimeUpdate]);
+    // Don't call onTimeUpdate here - let the timeupdate event handle it naturally
+  }, [duration]);
 
   const toggleFullscreen = useCallback(() => {
     if (!document.fullscreenElement) {
