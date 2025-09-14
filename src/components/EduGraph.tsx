@@ -5,6 +5,17 @@ import { KnowledgeGraph } from './KnowledgeGraph';
 import { ConceptTimeline } from './ConceptTimeline';
 import { ConceptPanel } from './ConceptPanel';
 import { Header } from './Header';
+import { 
+  SidebarProvider, 
+  Sidebar, 
+  SidebarContent, 
+  SidebarHeader, 
+  SidebarInset, 
+  SidebarTrigger,
+  useSidebar 
+} from './ui/sidebar';
+import { Button } from './ui/button';
+import { Network } from 'lucide-react';
 
 export interface GraphNode {
   id: string;
@@ -249,47 +260,64 @@ export const EduGraph: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-background flex flex-col">
-      <Header />
-      
-      <div className="flex-1 flex flex-col lg:flex-row gap-4 p-4">
-        {/* Video Panel */}
-        <div className="flex-1 flex flex-col gap-4">
-          <VideoPlayer
-            videoUrl={videoData.url}
-            title={videoData.title}
-            duration={videoData.duration}
-            currentTime={currentTime}
-            onTimeUpdate={handleTimeUpdate}
-            concepts={videoData.nodes}
-          />
+    <SidebarProvider defaultOpen={false}>
+      <div className="min-h-screen bg-background flex flex-col w-full">
+        <Header />
+        
+        <div className="flex flex-1">
+          <Sidebar side="right" className="border-l">
+            <SidebarHeader className="flex flex-row items-center gap-2 p-4 border-b">
+              <Network className="h-5 w-5" />
+              <h2 className="font-semibold">Knowledge Graph</h2>
+            </SidebarHeader>
+            <SidebarContent className="p-4">
+              <KnowledgeGraph
+                nodes={videoData.nodes}
+                edges={videoData.edges}
+                onNodeClick={handleNodeClick}
+                selectedNode={selectedNode}
+              />
+              
+              {selectedNode && (
+                <div className="mt-4">
+                  <ConceptPanel
+                    concept={selectedNode}
+                    onClose={() => setSelectedNode(null)}
+                    onTimeJump={(time) => setCurrentTime(time)}
+                  />
+                </div>
+              )}
+            </SidebarContent>
+          </Sidebar>
           
-          <ConceptTimeline
-            duration={videoData.duration}
-            currentTime={currentTime}
-            concepts={videoData.nodes}
-            onClick={handleTimelineClick}
-          />
-        </div>
-
-        {/* Graph Panel */}
-        <div className="flex-1 flex flex-col gap-4">
-          <KnowledgeGraph
-            nodes={videoData.nodes}
-            edges={videoData.edges}
-            onNodeClick={handleNodeClick}
-            selectedNode={selectedNode}
-          />
-          
-          {selectedNode && (
-            <ConceptPanel
-              concept={selectedNode}
-              onClose={() => setSelectedNode(null)}
-              onTimeJump={(time) => setCurrentTime(time)}
-            />
-          )}
+          <SidebarInset>
+            <div className="flex flex-col gap-4 p-4 h-full">
+              <div className="flex items-center gap-2 pb-2 border-b">
+                <SidebarTrigger />
+                <h1 className="text-lg font-semibold">Educational Video Player</h1>
+              </div>
+              
+              <div className="flex-1 flex flex-col gap-4">
+                <VideoPlayer
+                  videoUrl={videoData.url}
+                  title={videoData.title}
+                  duration={videoData.duration}
+                  currentTime={currentTime}
+                  onTimeUpdate={handleTimeUpdate}
+                  concepts={videoData.nodes}
+                />
+                
+                <ConceptTimeline
+                  duration={videoData.duration}
+                  currentTime={currentTime}
+                  concepts={videoData.nodes}
+                  onClick={handleTimelineClick}
+                />
+              </div>
+            </div>
+          </SidebarInset>
         </div>
       </div>
-    </div>
+    </SidebarProvider>
   );
 };
