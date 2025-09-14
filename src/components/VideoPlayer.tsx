@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState, useCallback } from 'react';
+import React, { useRef, useEffect, useState, useCallback, useMemo } from 'react';
 import { Play, Pause, Volume2, VolumeX, Maximize, Settings } from 'lucide-react';
 import { Button } from './ui/button';
 import { GraphNode } from './EduGraph';
@@ -39,7 +39,7 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     if (!video) return;
 
     let lastUpdateTime = 0;
-    const UPDATE_INTERVAL = 100; // Update every 100ms instead of every frame
+    const UPDATE_INTERVAL = 200; // Update every 200ms for better performance
 
     const handleTimeUpdate = () => {
       const now = Date.now();
@@ -134,15 +134,26 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
     return `${minutes}:${seconds.toString().padStart(2, '0')}`;
   }, []);
 
-  const getActiveConcepts = useCallback(() => {
+  const activeConcepts = useMemo(() => {
     return concepts.filter(concept => concept.isActive);
   }, [concepts]);
 
-  const getConceptsAtTime = useCallback((time: number) => {
+  const conceptsAtTime = useMemo(() => {
     return concepts.filter(concept =>
-      concept.timestamps.some(timestamp => Math.abs(timestamp - time) < 15)
+      concept.timestamps.some(timestamp => Math.abs(timestamp - currentTime) < 15)
     );
-  }, [concepts]);
+  }, [concepts, currentTime]);
+
+  const conceptMarkers = useMemo(() => {
+    return concepts.flatMap((concept) =>
+      concept.timestamps.map((timestamp, index) => ({
+        key: `${concept.id}-${index}`,
+        timestamp,
+        label: concept.label,
+        position: (timestamp / duration) * 100
+      }))
+    );
+  }, [concepts, duration]);
 
   return (
     <div className="video-container bg-card rounded-lg overflow-hidden shadow-lg">
@@ -161,21 +172,23 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
           }}
         />
         
-        {/* Concept Overlays */}
-        <div className="absolute top-4 right-4 space-y-2 pointer-events-none">
-          {getActiveConcepts().map((concept) => (
-            <div
-              key={concept.id}
-              className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium animate-pulse-node"
-              style={{
-                willChange: 'transform, opacity',
-                transform: 'translateZ(0)', // Hardware acceleration
-              }}
-            >
-              {concept.label}
-            </div>
-          ))}
-        </div>
+        {/* Optimized Concept Overlays */}
+        {activeConcepts.length > 0 && (
+          <div className="absolute top-4 right-4 space-y-2 pointer-events-none">
+            {activeConcepts.map((concept) => (
+              <div
+                key={concept.id}
+                className="bg-primary/90 text-primary-foreground px-3 py-1 rounded-full text-sm font-medium animate-pulse-node"
+                style={{
+                  willChange: 'transform, opacity',
+                  transform: 'translateZ(0)', // Hardware acceleration
+                }}
+              >
+                {concept.label}
+              </div>
+            ))}
+          </div>
+        )}
 
         {/* Video Controls */}
         <div 
@@ -194,17 +207,15 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
                 className="progress-fill h-full rounded-full relative"
                 style={{ width: `${(currentTime / duration) * 100}%` }}
               >
-                {/* Concept Markers */}
-                {concepts.map((concept) =>
-                  concept.timestamps.map((timestamp, index) => (
-                    <div
-                      key={`${concept.id}-${index}`}
-                      className="timeline-marker absolute w-2 h-4 -top-1 rounded-sm transition-all duration-200"
-                      style={{ left: `${(timestamp / duration) * 100}%` }}
-                      title={concept.label}
-                    />
-                  ))
-                )}
+                {/* Optimized Concept Markers */}
+                {conceptMarkers.map((marker) => (
+                  <div
+                    key={marker.key}
+                    className="timeline-marker absolute w-2 h-4 -top-1 rounded-sm transition-all duration-200"
+                    style={{ left: `${marker.position}%` }}
+                    title={marker.label}
+                  />
+                ))}
               </div>
             </div>
           </div>
@@ -280,8 +291,8 @@ export const VideoPlayer: React.FC<VideoPlayerProps> = ({
         <div className="flex items-center justify-between mt-2 text-sm text-muted-foreground">
           <span>Duration: {formatTime(duration)}</span>
           <span>
-            {getConceptsAtTime(currentTime).length > 0 && 
-              `Current concepts: ${getConceptsAtTime(currentTime).map(c => c.label).join(', ')}`
+            {conceptsAtTime.length > 0 && 
+              `Current concepts: ${conceptsAtTime.map(c => c.label).join(', ')}`
             }
           </span>
         </div>
