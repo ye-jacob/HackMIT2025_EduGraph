@@ -1,0 +1,433 @@
+{
+    "lecture_info": {
+      "course": "MIT 18.06 Linear Algebra",
+      "lecture_number": 1,
+      "instructor": "Gilbert Strang",
+      "title": "The Geometry of Linear Equations"
+    },
+    "hierarchical_structure": {
+      "layer_1": [
+        {
+          "id": "1",
+          "title": "Course Introduction",
+          "layer_2": [
+            {"id": "1.1", "title": "Course Materials"},
+            {"id": "1.2", "title": "Lecture Objectives"}
+          ]
+        },
+        {
+          "id": "2", 
+          "title": "The Fundamental Problem of Linear Algebra",
+          "layer_2": [
+            {"id": "2.1", "title": "System Setup"},
+            {"id": "2.2", "title": "Solution Approaches"}
+          ]
+        },
+        {
+          "id": "3",
+          "title": "Three Ways to View Linear Systems", 
+          "layer_2": [
+            {
+              "id": "3.1", 
+              "title": "Row Picture",
+              "layer_3": [
+                {"id": "3.1.1", "title": "2D Case (Lines)"},
+                {"id": "3.1.2", "title": "3D Case (Planes)"}
+              ]
+            },
+            {
+              "id": "3.2", 
+              "title": "Column Picture",
+              "importance": "starred",
+              "layer_3": [
+                {"id": "3.2.1", "title": "Linear Combinations"},
+                {"id": "3.2.2", "title": "Geometric Visualization"}
+              ]
+            },
+            {
+              "id": "3.3", 
+              "title": "Matrix Form",
+              "layer_3": [
+                {"id": "3.3.1", "title": "Coefficient Matrix"},
+                {"id": "3.3.2", "title": "Vector Notation"}
+              ]
+            }
+          ]
+        },
+        {
+          "id": "4",
+          "title": "Matrix Form and Operations",
+          "layer_2": [
+            {"id": "4.1", "title": "Matrix-Vector Multiplication"},
+            {"id": "4.2", "title": "Linear Combinations"}
+          ]
+        },
+        {
+          "id": "5",
+          "title": "Solvability Analysis",
+          "layer_2": [
+            {"id": "5.1", "title": "Conditions for Solutions"},
+            {"id": "5.2", "title": "Geometric Interpretation"},
+            {"id": "5.3", "title": "Higher Dimensions"}
+          ]
+        }
+      ]
+    },
+    "detailed_breakdown": [
+      {
+        "id": "1.1",
+        "timestamp": "0:00-0:44",
+        "category": "introduction",
+        "subcategory": "course_setup",
+        "detail": "Course introduction, textbook (Introduction to Linear Algebra), web page web.mit.edu/18.06"
+      },
+      {
+        "id": "1.2", 
+        "timestamp": "0:44-1:09",
+        "category": "introduction",
+        "subcategory": "lecture_overview", 
+        "detail": "First lecture agenda, video availability mentioned"
+      },
+      {
+        "id": "2.1",
+        "timestamp": "1:02-1:26",
+        "category": "definition",
+        "subcategory": "problem_statement",
+        "detail": "Fundamental problem: solve system of linear equations with n equations, n unknowns"
+      },
+      {
+        "id": "2.2",
+        "timestamp": "1:26-2:08", 
+        "category": "overview",
+        "subcategory": "three_approaches",
+        "detail": "Three ways to view the problem: Row picture, Column picture (*starred as most important), Matrix form"
+      },
+      {
+        "id": "3.1",
+        "timestamp": "2:17-2:45",
+        "category": "example",
+        "subcategory": "2x2_system_setup", 
+        "detail": "Example system: 2x - y = 0, -x + 2y = 3"
+      },
+      {
+        "id": "3.2",
+        "timestamp": "2:45-3:32",
+        "category": "definition",
+        "subcategory": "matrix_components",
+        "detail": "Coefficient matrix A = [2,-1; -1,2], unknown vector [x,y], right-hand side [0,3]"
+      },
+      {
+        "id": "3.3",
+        "timestamp": "3:32-4:20",
+        "category": "definition", 
+        "subcategory": "matrix_form",
+        "detail": "General form: Ax = b, where A is coefficient matrix, x is unknowns, b is right-hand side"
+      },
+      {
+        "id": "4.1",
+        "timestamp": "4:20-4:32",
+        "category": "method",
+        "subcategory": "row_picture_introduction", 
+        "detail": "Row picture: take one equation at a time"
+      },
+      {
+        "id": "4.2", 
+        "timestamp": "4:32-6:08",
+        "category": "example",
+        "subcategory": "first_equation_visualization",
+        "detail": "Plot 2x - y = 0: passes through origin (0,0) and (1,2), forms a straight line"
+      },
+      {
+        "id": "4.3",
+        "timestamp": "6:08-7:46",
+        "category": "example", 
+        "subcategory": "second_equation_visualization",
+        "detail": "Plot -x + 2y = 3: passes through (-3,0) and (-1,1), forms second line"
+      },
+      {
+        "id": "4.4",
+        "timestamp": "7:46-8:25",
+        "category": "solution",
+        "subcategory": "row_picture_solution",
+        "detail": "Lines intersect at (1,2), which solves both equations"
+      },
+      {
+        "id": "5.1", 
+        "timestamp": "8:25-8:47",
+        "category": "transition",
+        "subcategory": "column_picture_introduction",
+        "detail": "Key transition to column picture - 'Pay attention, this is the key point'"
+      },
+      {
+        "id": "5.2",
+        "timestamp": "8:47-10:06", 
+        "category": "definition",
+        "subcategory": "linear_combination_concept",
+        "detail": "Rewrite system as x[2;-1] + y[-1;2] = [0;3] - linear combination of columns"
+      },
+      {
+        "id": "5.3",
+        "timestamp": "10:06-10:30",
+        "category": "definition",
+        "subcategory": "linear_combination",
+        "detail": "Most fundamental operation: linear combination of columns"
+      },
+      {
+        "id": "5.4",
+        "timestamp": "10:30-11:39",
+        "category": "visualization",
+        "subcategory": "column_vector_drawing", 
+        "detail": "Draw column vectors: [2;-1] and [-1;2] in coordinate plane"
+      },
+      {
+        "id": "5.5",
+        "timestamp": "11:39-12:21",
+        "category": "method",
+        "subcategory": "linear_combination_method",
+        "detail": "Find right combination: x=1, y=2 to produce [0;3]"
+      },
+      {
+        "id": "5.6",
+        "timestamp": "12:21-14:01", 
+        "category": "visualization",
+        "subcategory": "vector_addition",
+        "detail": "Visual demonstration: 1×[2;-1] + 2×[-1;2] = [0;3] using vector addition"
+      },
+      {
+        "id": "5.7",
+        "timestamp": "14:01-15:25",
+        "category": "extension",
+        "subcategory": "all_combinations_question",
+        "detail": "What are all possible combinations? Answer: fill the entire plane"
+      },
+      {
+        "id": "6.1", 
+        "timestamp": "15:25-16:16",
+        "category": "extension",
+        "subcategory": "3d_system_introduction",
+        "detail": "Move to 3 equations, 3 unknowns: 2x-y=0, -x+2y-z=-1, -3y+4z=4"
+      },
+      {
+        "id": "6.2",
+        "timestamp": "16:16-17:20",
+        "category": "definition",
+        "subcategory": "3x3_matrix_form",
+        "detail": "Matrix A = [2,-1,0; -1,2,-1; 0,-3,4], b = [0;-1;4]"
+      },
+      {
+        "id": "7.1",
+        "timestamp": "17:20-19:19",
+        "category": "visualization", 
+        "subcategory": "3d_row_picture",
+        "detail": "Each equation represents a plane in 3D space"
+      },
+      {
+        "id": "7.2",
+        "timestamp": "19:19-21:11",
+        "category": "geometry",
+        "subcategory": "plane_intersection",
+        "detail": "Three planes meet at one point (the solution)"
+      },
+      {
+        "id": "7.3",
+        "timestamp": "21:11-22:04",
+        "category": "assessment",
+        "subcategory": "row_picture_limitation",
+        "detail": "Row picture becomes difficult to visualize in higher dimensions"
+      },
+      {
+        "id": "8.1", 
+        "timestamp": "22:04-22:52",
+        "category": "method",
+        "subcategory": "3d_column_picture",
+        "detail": "Express as x[2;-1;0] + y[-1;2;-3] + z[0;-1;4] = [0;-1;4]"
+      },
+      {
+        "id": "8.2",
+        "timestamp": "22:52-24:48",
+        "category": "visualization",
+        "subcategory": "3d_column_vectors", 
+        "detail": "Draw three column vectors in 3D space"
+      },
+      {
+        "id": "8.3",
+        "timestamp": "24:48-25:28",
+        "category": "solution",
+        "subcategory": "special_solution",
+        "detail": "Solution x=0, y=0, z=1 because b equals third column"
+      },
+      {
+        "id": "9.1",
+        "timestamp": "25:28-26:09",
+        "category": "preview", 
+        "subcategory": "elimination_method",
+        "detail": "Next lecture will cover systematic elimination method"
+      },
+      {
+        "id": "10.1",
+        "timestamp": "26:09-27:11",
+        "category": "extension",
+        "subcategory": "different_right_hand_side",
+        "detail": "Change b to [1;1;-3] = column1 + column2, solution becomes (1,1,0)"
+      },
+      {
+        "id": "11.1", 
+        "timestamp": "27:48-28:24",
+        "category": "question",
+        "subcategory": "solvability_question", 
+        "detail": "Can we solve Ax = b for every right-hand side b?"
+      },
+      {
+        "id": "11.2",
+        "timestamp": "28:24-29:12",
+        "category": "reformulation",
+        "subcategory": "linear_combination_question",
+        "detail": "Do linear combinations of columns fill 3D space?"
+      },
+      {
+        "id": "11.3",
+        "timestamp": "29:12-30:04", 
+        "category": "answer",
+        "subcategory": "good_matrix_case",
+        "detail": "For this matrix: Yes, it's non-singular/invertible"
+      },
+      {
+        "id": "12.1",
+        "timestamp": "30:04-30:43",
+        "category": "analysis",
+        "subcategory": "failure_conditions",
+        "detail": "When could it go wrong?"
+      },
+      {
+        "id": "12.2", 
+        "timestamp": "30:43-32:25",
+        "category": "example",
+        "subcategory": "singular_case",
+        "detail": "If three columns lie in same plane, combinations won't fill 3D space"
+      },
+      {
+        "id": "13.1",
+        "timestamp": "32:25-33:18",
+        "category": "extension",
+        "subcategory": "nine_dimensions",
+        "detail": "Consider 9 equations, 9 unknowns - same principles apply"
+      },
+      {
+        "id": "13.2",
+        "timestamp": "33:18-34:48", 
+        "category": "analysis",
+        "subcategory": "high_dimensional_intuition", 
+        "detail": "Nine columns in 9D space, linear combinations may fill entire space"
+      },
+      {
+        "id": "13.3",
+        "timestamp": "34:48-35:32",
+        "category": "geometry",
+        "subcategory": "dimensional_reduction",
+        "detail": "If column 9 = column 8, get 8D 'plane' in 9D space"
+      },
+      {
+        "id": "14.1",
+        "timestamp": "35:32-36:07", 
+        "category": "return",
+        "subcategory": "matrix_multiplication_focus",
+        "detail": "Return to matrix form Ax = b"
+      },
+      {
+        "id": "14.2",
+        "timestamp": "36:07-37:35",
+        "category": "example",
+        "subcategory": "matrix_vector_multiplication",
+        "detail": "Example: [2,5;1,3] × [1;2] using column interpretation"
+      },
+      {
+        "id": "14.3", 
+        "timestamp": "37:35-38:19",
+        "category": "alternative",
+        "subcategory": "row_method",
+        "detail": "Alternative: dot product of rows with vector"
+      },
+      {
+        "id": "14.4",
+        "timestamp": "38:19-38:51",
+        "category": "key_concept",
+        "subcategory": "column_interpretation",
+        "detail": "Ax is linear combination of columns of A"
+      },
+      {
+        "id": "15.1",
+        "timestamp": "39:02-39:25", 
+        "category": "conclusion",
+        "subcategory": "next_lecture_preview",
+        "detail": "Systematic elimination method to find solutions"
+      },
+      {
+        "id": "15.2",
+        "timestamp": "39:25-39:39",
+        "category": "conclusion",
+        "subcategory": "failure_analysis", 
+        "detail": "Determine when no solution exists"
+      }
+    ],
+    "key_concepts": {
+      "fundamental_definitions": [
+        {
+          "term": "Linear System",
+          "definition": "Ax = b where A is coefficient matrix, x is unknown vector, b is right-hand side"
+        },
+        {
+          "term": "Linear Combination", 
+          "definition": "Sum of scalar multiples of vectors"
+        },
+        {
+          "term": "Non-singular Matrix",
+          "definition": "Matrix whose columns span the entire space (always has solution)"
+        },
+        {
+          "term": "Singular Matrix",
+          "definition": "Matrix whose columns don't span entire space (some b have no solution)"
+        }
+      ],
+      "three_perspectives": [
+        {
+          "name": "Row Picture",
+          "description": "Each equation as geometric object (line in 2D, plane in 3D)"
+        },
+        {
+          "name": "Column Picture", 
+          "description": "Linear combination of column vectors",
+          "importance": "most_important"
+        },
+        {
+          "name": "Matrix Form",
+          "description": "Compact notation Ax = b"
+        }
+      ],
+      "critical_insights": [
+        "Matrix-vector multiplication Ax produces linear combinations of A's columns",
+        "Solvability depends on whether column combinations can produce any right-hand side b", 
+        "Visualization becomes difficult beyond 3D, but mathematical principles remain consistent"
+      ]
+    },
+    "categories_used": [
+      "introduction",
+      "definition", 
+      "example",
+      "method",
+      "visualization",
+      "analysis", 
+      "extension",
+      "transition",
+      "solution",
+      "geometry",
+      "assessment", 
+      "preview",
+      "question",
+      "reformulation",
+      "answer",
+      "return",
+      "alternative",
+      "key_concept", 
+      "conclusion"
+    ]
+  }
