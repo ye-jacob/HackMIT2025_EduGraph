@@ -322,19 +322,19 @@ const EduGraphContent: React.FC<EduGraphContentProps> = ({
       <Header />
       
       <div className="flex flex-1">
-        <div className="transition-all duration-300" style={{ width: open ? '50vw' : '100vw' }}>
-          <div className="flex flex-col gap-4 p-4 h-full">
-            <div className="flex items-center justify-between gap-2 pb-2 border-b">
-              <h1 className="text-lg font-semibold">Educational Video Player</h1>
-              <SidebarTrigger className="ml-auto">
-                <Button variant="outline" size="sm" className="gap-2">
-                  <Network className="h-4 w-4" />
-                  Knowledge Graph
-                </Button>
-              </SidebarTrigger>
-            </div>
-            
-            <div className="flex-1 flex flex-col gap-4">
+        <div className="transition-all duration-300 flex flex-col" style={{ width: open ? '50vw' : '100vw' }}>
+          <div className="flex items-center justify-between gap-2 p-4 pb-2 border-b flex-shrink-0">
+            <h1 className="text-lg font-semibold">Educational Video Player</h1>
+            <SidebarTrigger className="ml-auto">
+              <Button variant="outline" size="sm" className="gap-2">
+                <Network className="h-4 w-4" />
+                Knowledge Graph
+              </Button>
+            </SidebarTrigger>
+          </div>
+          
+          <div className="flex-1 overflow-y-auto">
+            <div className="flex flex-col gap-4 p-4">
               <VideoPlayer
                 videoUrl={videoData.url}
                 title={videoData.title}
@@ -355,42 +355,43 @@ const EduGraphContent: React.FC<EduGraphContentProps> = ({
         </div>
         
         <div 
-          className="border-l bg-background transition-all duration-300 overflow-hidden"
+          className="border-l bg-background transition-all duration-300 overflow-hidden flex flex-col"
           style={{ width: open ? '50vw' : '0px' }}
         >
-          <div className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background">
+          <div className="flex flex-row items-center justify-between gap-2 p-4 border-b bg-background flex-shrink-0">
             <div className="flex items-center gap-2">
               <Network className="h-5 w-5" />
               <h2 className="font-semibold">Knowledge Graph</h2>
             </div>
             <SidebarTrigger />
           </div>
-          <div className="p-4 bg-background h-full">
-            <Card className="h-full flex flex-col">
-              <CardHeader className="pb-3">
-                <CardTitle className="text-lg">Interactive Knowledge Graph</CardTitle>
-              </CardHeader>
-              <CardContent className="flex-1 flex flex-col p-0">
-                <div className="flex-1 p-4">
-                  <KnowledgeGraph
-                    nodes={videoData.nodes}
-                    edges={videoData.edges}
-                    onNodeClick={onNodeClick}
-                    selectedNode={selectedNode}
-                  />
-                </div>
-                
-                {selectedNode && (
-                  <div className="p-4 border-t">
+          <div className="flex-1 flex flex-col bg-background">
+            {/* Knowledge Graph Area */}
+            <div className="flex-1 overflow-y-auto">
+              <div className="p-4 h-full">
+                <KnowledgeGraph
+                  nodes={videoData.nodes}
+                  edges={videoData.edges}
+                  onNodeClick={onNodeClick}
+                  selectedNode={selectedNode}
+                />
+              </div>
+            </div>
+            
+            {/* Concept Panel Area with separate scroll */}
+            {selectedNode && (
+              <div className="border-t bg-background flex-shrink-0">
+                <div className="max-h-64 overflow-y-auto">
+                  <div className="p-4">
                     <ConceptPanel
                       concept={selectedNode}
                       onClose={() => onSelectedNodeChange(null)}
                       onTimeJump={(time) => onTimeUpdate(time)}
                     />
                   </div>
-                )}
-              </CardContent>
-            </Card>
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
