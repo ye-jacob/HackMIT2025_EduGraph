@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { HierarchicalGraph } from './HierarchicalGraph';
+import { DedalusChat } from './DedalusChat';
 import { GraphNode, GraphEdge } from './EduGraph';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Button } from './ui/button';
@@ -267,35 +268,50 @@ export const Home: React.FC<HomeProps> = ({ onVideoClick, onNavigateToVideo }) =
           </div>
         )}
 
-        {/* Hierarchical Knowledge Graph */}
-        {combinedNodes.length > 0 ? (
-          <div className="mb-8">
+        {/* Main Content Grid */}
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mb-8">
+          {/* Hierarchical Knowledge Graph */}
+          <div className="lg:col-span-2">
+            {combinedNodes.length > 0 ? (
+              <div>
+                <h2 className="text-2xl font-semibold text-foreground mb-4">
+                  Course Knowledge Overview
+                </h2>
+                <div className="h-[600px] border border-border rounded-lg overflow-hidden">
+                  <HierarchicalGraph
+                    nodes={combinedNodes}
+                    edges={combinedEdges}
+                    onNodeClick={handleNodeClick}
+                    selectedNode={selectedNode}
+                  />
+                </div>
+              </div>
+            ) : (
+              <div className="text-center py-12">
+                <Network className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+                <h3 className="text-lg font-semibold text-foreground mb-2">
+                  No Knowledge Graphs Available
+                </h3>
+                <p className="text-muted-foreground mb-4">
+                  Upload and process some videos to see the combined knowledge graph.
+                </p>
+                <Button onClick={() => window.location.href = '/'}>
+                  Upload Videos
+                </Button>
+              </div>
+            )}
+          </div>
+
+          {/* Dedalus AI Chat */}
+          <div className="lg:col-span-1">
             <h2 className="text-2xl font-semibold text-foreground mb-4">
-              Course Knowledge Overview
+              AI Assistant
             </h2>
-            <div className="h-[600px] border border-border rounded-lg overflow-hidden">
-              <HierarchicalGraph
-                nodes={combinedNodes}
-                edges={combinedEdges}
-                onNodeClick={handleNodeClick}
-                selectedNode={selectedNode}
-              />
+            <div className="h-[600px]">
+              <DedalusChat />
             </div>
           </div>
-        ) : (
-          <div className="text-center py-12">
-            <Network className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-            <h3 className="text-lg font-semibold text-foreground mb-2">
-              No Knowledge Graphs Available
-            </h3>
-            <p className="text-muted-foreground mb-4">
-              Upload and process some videos to see the combined knowledge graph.
-            </p>
-            <Button onClick={() => window.location.href = '/'}>
-              Upload Videos
-            </Button>
-          </div>
-        )}
+        </div>
 
         {/* Selected Node Details */}
         {selectedNode && (
