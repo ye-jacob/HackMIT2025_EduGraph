@@ -3,6 +3,7 @@ import { VideoPlayer } from './VideoPlayer';
 import { KnowledgeGraph } from './KnowledgeGraph';
 import { ConceptTimeline } from './ConceptTimeline';
 import { ConceptPanel } from './ConceptPanel';
+import { DedalusChat } from './DedalusChat';
 import { GraphNode, GraphEdge } from './EduGraph';
 import { Card, CardContent, CardHeader, CardTitle } from './ui/card';
 import { Badge } from './ui/badge';
@@ -200,6 +201,13 @@ export const VideoView: React.FC<VideoViewProps> = ({ video }) => {
                 </CardContent>
               </Card>
             )}
+
+            {/* Dedalus AI Chat */}
+            <Card className="h-[400px]">
+              <CardContent className="p-0 h-full">
+                <DedalusChat />
+              </CardContent>
+            </Card>
           </div>
         </div>
 
