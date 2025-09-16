@@ -1,0 +1,218 @@
+{
+  "metadata": {
+    "source_video": "Parts of a Plant  Plant  Biology  FuseSchool - FuseSchool - Global Education (360p, h264, youtube).mp4",
+    "generated_on": "2025-09-16T00:17:00.800Z",
+    "type": "knowledge_graph",
+    "node_count": 9,
+    "edge_count": 8
+  },
+  "nodes": [
+    {
+      "id": "node_0",
+      "label": "Introduction to Plant Structure",
+      "x": 313.8801089881532,
+      "y": 221.48652105565768,
+      "size": 20,
+      "color": "hsl(0, 70%, 60%)",
+      "timestamps": [
+        0,
+        7,
+        22,
+        31,
+        54,
+        89,
+        133,
+        144,
+        160,
+        182,
+        194,
+        220,
+        289,
+        295
+      ],
+      "description": "Introduces the topic of plant structure, highlighting the diversity of plant shapes and sizes while emphasizing common structural features.  Mentions that all plants belong to the same kingdom.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_1",
+      "label": "Kingdom Classification",
+      "x": 375.92107651262364,
+      "y": 374.324580631264,
+      "size": 17,
+      "color": "hsl(60, 70%, 60%)",
+      "timestamps": [
+        0,
+        7
+      ],
+      "description": "Introduces the topic of plant structure, highlighting the diversity of plant shapes and sizes while emphasizing common structural features.  Mentions that all plants belong to the same kingdom.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_2",
+      "label": "Plant Kingdom",
+      "x": 231.05487998242228,
+      "y": 315.65715101622055,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        0
+      ],
+      "description": "Introduces the topic of plant structure, highlighting the diversity of plant shapes and sizes while emphasizing common structural features.  Mentions that all plants belong to the same kingdom.",
+      "category": "prerequisite",
+      "isActive": false
+    },
+    {
+      "id": "node_3",
+      "label": "Other Kingdoms (Animals, Fungi, Prokaryotes, Protista)",
+      "x": 266.8012382752203,
+      "y": 293.9696478554834,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        7
+      ],
+      "description": "Briefly lists the five kingdoms of life: Plants, Animals, Fungi, Prokaryotes, and Protista.  Includes a suggestion to watch another video for more details on classification.  This serves as a transition to the main focus of the lecture.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_4",
+      "label": "Plant Structure Overview",
+      "x": 180.02147608437895,
+      "y": 141.46461642615938,
+      "size": 17,
+      "color": "hsl(90, 70%, 60%)",
+      "timestamps": [
+        22,
+        31,
+        54,
+        89,
+        133,
+        144,
+        160,
+        182,
+        194,
+        220,
+        289
+      ],
+      "description": "States the main objective of the video: to learn about the structural features of plants. Sets the stage for the detailed discussion of plant parts.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_5",
+      "label": "Root System",
+      "x": 294.88398673520464,
+      "y": 221.33141350788077,
+      "size": 14,
+      "color": "hsl(120, 70%, 60%)",
+      "timestamps": [
+        22,
+        31,
+        54
+      ],
+      "description": "States the main objective of the video: to learn about the structural features of plants. Sets the stage for the detailed discussion of plant parts.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_6",
+      "label": "Stem",
+      "x": 399.34819427267706,
+      "y": 147.73666643894282,
+      "size": 14,
+      "color": "hsl(150, 70%, 60%)",
+      "timestamps": [
+        89
+      ],
+      "description": "Describes the stem's function in supporting above-ground parts and transporting substances (sucrose, amino acids in phloem; water, minerals in xylem).  Highlights the role of lignin in stem support.  Provides examples of underground stems (potatoes, yukas).",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_7",
+      "label": "Leaves",
+      "x": 173.05830603625694,
+      "y": 258.18046934814436,
+      "size": 14,
+      "color": "hsl(180, 70%, 60%)",
+      "timestamps": [
+        133,
+        144,
+        160
+      ],
+      "description": "Transitions to the discussion of leaves, prompting viewers to consider the importance of leaves for plants before revealing the answer.",
+      "category": "definition",
+      "isActive": false
+    },
+    {
+      "id": "node_8",
+      "label": "Flower",
+      "x": 466.98008829590316,
+      "y": 204.31855467114363,
+      "size": 14,
+      "color": "hsl(210, 70%, 60%)",
+      "timestamps": [
+        182,
+        194,
+        220,
+        289
+      ],
+      "description": "Transitions to the discussion of flowers, prompting viewers to think about the purpose of flowers before the explanation.",
+      "category": "definition",
+      "isActive": false
+    }
+  ],
+  "edges": [
+    {
+      "source": "node_0",
+      "target": "node_1",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_2",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_1",
+      "target": "node_3",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_0",
+      "target": "node_4",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_4",
+      "target": "node_5",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_4",
+      "target": "node_6",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_4",
+      "target": "node_7",
+      "type": "related",
+      "strength": 0.7
+    },
+    {
+      "source": "node_4",
+      "target": "node_8",
+      "type": "related",
+      "strength": 0.7
+    }
+  ]
+}
